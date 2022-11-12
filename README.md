@@ -8,9 +8,14 @@
 
 - 글 작성시 해당 글이 검색엔진에 잘 노출 되도록 SSG를 이용
 - 관리자 페이지 필요
-- 디자인 기본 [티스토리](https://www.tistory.com/)를 바탕으로 일본의 [Qiita](https://qiita.com/)도 참고하고자 한다.
 - 글 작성시 코드 및 이미지 추가도 가능하게 한다.
 - 모바일 대응
+- 참고할 디자인 모델
+  - [티스토리](https://www.tistory.com/)
+  - [Qiita](https://qiita.com/)
+  - [오웬의 개발 이야기](https://devowen.com/440)
+  - [기억 보다 기록을](https://kyounghwan01.github.io/blog)
+  - [평범한 직장인의 공부 정리](https://developer-talk.tistory.com/)
 - 추가중...
 
 ## 기술
