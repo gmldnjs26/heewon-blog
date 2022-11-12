@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { sp_view } from '../styles/mediaQuery';
 import { AppProps as NextAppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from '@mui/material/styles';
@@ -20,6 +21,9 @@ import Navigation from '../components/Navigation';
 const StApp = styled.div`
   width: 1000px;
   margin: auto;
+  ${sp_view} {
+    width: 100%;
+  }
 `;
 
 const App = ({ Component, pageProps, emotionCache = clientSideEmotionCache }: AppProps<any>) => {
