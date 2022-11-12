@@ -11,6 +11,13 @@ export const roboto = Roboto({
 
 // Create a theme instance.
 const theme = createTheme({
+  components: {
+    MuiUseMediaQuery: {
+      defaultProps: {
+        noSsr: true,
+      },
+    },
+  },
   palette: {
     primary: {
       main: '#556cd6',
