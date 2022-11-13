@@ -16,7 +16,7 @@
   - [오웬의 개발 이야기](https://devowen.com/440)
   - [기억 보다 기록을](https://kyounghwan01.github.io/blog)
   - [평범한 직장인의 공부 정리](https://developer-talk.tistory.com/)
-- 추가중...
+- 실제 책갈피와 같이 인덱스 기능을 넣어서 인덱스 링크 리스트를 보존 관리해서 정보를 찾는데 좀더 간단하게 찾을 수 있는? 기능도 있으면 좋겠다.
 
 ## 기술
 
