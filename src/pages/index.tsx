@@ -1,10 +1,10 @@
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import { Fragment } from 'react';
+import PostList from '../components/PostList';
 const Home = () => {
   return (
-    <div>
-      Index Page
-      <AccessAlarmIcon />
-    </div>
+    <Fragment>
+      <PostList />
+    </Fragment>
   );
 };
 
