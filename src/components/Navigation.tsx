@@ -1,9 +1,8 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import React, { useState, FC } from 'react';
-import theme from '../utils/theme';
 
 type Props = {
   styles: Object;
@@ -19,15 +18,15 @@ const AntTabs = styled(Tabs)({
   },
 });
 
-const AntTab = styled((props: StyledTabProps) => <Tab disableRipple {...props} />)(() => ({
+const AntTab = styled((props: StyledTabProps) => <Tab disableRipple {...props} />)(({ theme }) => ({
   textTransform: 'none',
   minWidth: 0,
   [theme.breakpoints.up('sm')]: {
     minWidth: 0,
   },
+  fontWeight: theme.typography.fontWeightRegular,
   marginRight: theme.spacing(1),
   fontSize: '1rem',
-  fontWeight: theme.typography.fontWeightMedium,
   color: 'rgba(0, 0, 0, 0.85)',
   '&:hover': {
     color: '#f0d1a0',

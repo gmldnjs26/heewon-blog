@@ -1,7 +1,6 @@
-import styled from 'styled-components';
 import { AppProps as NextAppProps } from 'next/app';
 import Head from 'next/head';
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider, styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import theme from '../utils/theme';
@@ -21,15 +20,15 @@ import Navigation from '../components/Navigation';
 import Header from '../components/Header';
 
 const SC = {
-  App: styled.div`
-    background: #f5f6f6;
-    height: 100vh;
-  `,
-  Container: styled.div`
-    max-width: 1000px;
-    margin: auto;
-    width: 100%;
-  `,
+  App: styled('div')(({ theme }) => ({
+    background: '#f5f6f6',
+    height: '100vh',
+  })),
+  Container: styled('div')(({ theme }) => ({
+    maxWidth: '1000px',
+    margin: 'auto',
+    width: '100%',
+  })),
 };
 
 const App = ({ Component, pageProps, emotionCache = clientSideEmotionCache }: AppProps<any>) => {

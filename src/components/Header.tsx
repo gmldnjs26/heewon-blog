@@ -1,28 +1,29 @@
-import styled from 'styled-components';
 import { sp_view } from '../utils/styleHelper';
+import { styled } from '@mui/material/styles';
 
 import Link from 'next/link';
 
 const SC = {
-  Header: styled.div`
-    display: flex;
-    min-height: 96px;
-    padding: 0 16px;
-  `,
-  Link: styled(Link)`
-    display: inline-block;
-    margin-top: 16px;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #2c3e50;
-    &:hover {
-      opacity: 0.7;
-    }
-    ${sp_view} {
-      padding: 0 16px;
-      font-size: 1.2rem;
-    }
-  `,
+  Header: styled('div')(({ theme }) => ({
+    display: 'flex',
+    minHeight: '96px',
+    padding: '0 16px',
+    color: theme.palette.primary['200'],
+  })),
+  Link: styled(Link)(({ theme }) => ({
+    display: 'inline-block',
+    marginTop: '16px',
+    fontSize: '1.4rem',
+    fontWeight: '600',
+    color: '#2c3e50',
+    '&:hover': {
+      opacity: '0.7',
+    },
+    [sp_view]: {
+      padding: '0 16px',
+      fontSize: '1.2rem',
+    },
+  })),
 };
 
 const Header = () => {

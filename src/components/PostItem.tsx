@@ -1,7 +1,7 @@
-import styled from 'styled-components';
 import { FC } from 'react';
-import { primary_two } from '../utils/styleHelper';
+import { boxShadow } from '../utils/styleHelper';
 import ChatIcon from '@mui/icons-material/Chat';
+import { styled } from '@mui/material/styles';
 
 type Props = {
   post: {
@@ -19,49 +19,50 @@ type Props = {
 };
 
 const SC = {
-  PostItem: styled.li`
-    display: flex;
-    width: 100%;
-    height: 180px;
-    background: #fff;
-    border-radius: 3px;
-  `,
-  PostImageWrapper: styled.div`
-    background: ${primary_two};
-    padding: 8px;
-    min-width: 200px;
-  `,
-  PostMainWrapper: styled.div`
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  `,
-  PostTitle: styled.h2`
-    font-size: 20px;
-  `,
-  PostContents: styled.p`
-    font-size: 14px;
-    overflow: hidden;
-    min-height: 64px;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  `,
-  PostMetaInfo: styled.div`
-    display: flex;
-    font-size: 12px;
-    column-gap: 8px;
-  `,
-  PostCommentInfoWrapper: styled.div`
-    display: flex;
-    align-items: center;
-  `,
-  PostCommentIcon: styled(ChatIcon)`
-    font-size: 16px;
-    margin-right: 4px;
-  `,
+  PostItem: styled('li')(({ theme }) => ({
+    display: 'flex',
+    width: '100%',
+    height: '180px',
+    background: '#fff',
+    borderRadius: '3px',
+    boxShadow: [boxShadow],
+  })),
+  PostImageWrapper: styled('div')(({ theme }) => ({
+    background: theme.palette.primary.main,
+    padding: '8px',
+    minWidth: '200px',
+  })),
+  PostMainWrapper: styled('div')(({ theme }) => ({
+    padding: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  })),
+  PostTitle: styled('h2')(({ theme }) => ({
+    fontSize: '20px',
+  })),
+  PostContents: styled('p')(({ theme }) => ({
+    fontSize: '14px',
+    overflow: 'hidden',
+    minHeight: '64px',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    '-webkit-line-clamp': '3',
+    '-webkit-box-orient': 'vertical',
+  })),
+  PostMetaInfo: styled('div')(({ theme }) => ({
+    display: 'flex',
+    fontSize: '12px',
+    columnGap: '8px',
+  })),
+  PostCommentInfoWrapper: styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+  })),
+  PostCommentIcon: styled(ChatIcon)(({ theme }) => ({
+    fontSize: '16px',
+    marginRight: '4px',
+  })),
 };
 
 const PostItem: FC<Props> = ({ post }) => {
