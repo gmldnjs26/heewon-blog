@@ -1,8 +1,9 @@
 import { styled } from '@mui/material/styles';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 type Props = {
   className?: string;
+  children?: ReactNode;
 };
 
 const SC = {

@@ -6,16 +6,17 @@ import Link from 'next/link';
 const SC = {
   Header: styled('div')(({ theme }) => ({
     display: 'flex',
-    minHeight: '96px',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '64px',
     padding: '0 16px',
     color: theme.palette.primary['200'],
+    borderBottom: `1px solid ${theme.palette.secondary['700']}`,
   })),
   Link: styled(Link)(({ theme }) => ({
-    display: 'inline-block',
-    marginTop: '16px',
     fontSize: '1.4rem',
     fontWeight: '600',
-    color: '#2c3e50',
+    color: theme.palette.secondary['900'],
     '&:hover': {
       opacity: '0.7',
     },

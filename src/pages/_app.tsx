@@ -18,16 +18,24 @@ import 'src/styles/common.scss';
 
 import Navigation from '../components/Navigation';
 import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
 
 const SC = {
   App: styled('div')(({ theme }) => ({
+    position: 'relative',
     background: '#f5f6f6',
     height: '100vh',
   })),
   Container: styled('div')(({ theme }) => ({
     maxWidth: '1000px',
-    margin: 'auto',
+    margin: '0 auto',
     width: '100%',
+  })),
+  Sidebar: styled(Sidebar)(({ theme }) => ({
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    height: '100vh',
   })),
 };
 
@@ -42,6 +50,7 @@ const App = ({ Component, pageProps, emotionCache = clientSideEmotionCache }: Ap
         <CssBaseline />
         <SC.App>
           <Header />
+          <SC.Sidebar />
           <SC.Container>
             <Navigation styles={{ my: '16px' }} />
             <Component {...pageProps} />

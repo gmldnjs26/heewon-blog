@@ -4,6 +4,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import { styled } from '@mui/material/styles';
 
 type Props = {
+  className?: string;
   post: {
     id: number;
     title: string;
@@ -65,9 +66,9 @@ const SC = {
   })),
 };
 
-const PostItem: FC<Props> = ({ post }) => {
+const PostItem: FC<Props> = ({ className, post }) => {
   return (
-    <SC.PostItem>
+    <SC.PostItem className={className}>
       <SC.PostImageWrapper>
         <img src="#" />
       </SC.PostImageWrapper>

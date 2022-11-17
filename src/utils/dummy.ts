@@ -43,3 +43,54 @@ export const postList = [
     ],
   },
 ];
+
+export type Category = {
+  id: number;
+  parentId: number; // 0는 자기가 제일 상위 카테고리일때
+  name: string;
+  children?: Category[];
+};
+
+export const categories: Category[] = [
+  {
+    id: 1,
+    parentId: 0,
+    name: 'Vue',
+    children: [
+      {
+        id: 11,
+        parentId: 1,
+        name: 'Composition',
+      },
+    ],
+  },
+  {
+    id: 2,
+    parentId: 0,
+    name: 'React',
+    children: [
+      {
+        id: 11,
+        parentId: 1,
+        name: 'Composition',
+      },
+    ],
+  },
+  {
+    id: 3,
+    parentId: 0,
+    name: '일기',
+  },
+  {
+    id: 4,
+    parentId: 0,
+    name: 'Go',
+    children: [
+      {
+        id: 41,
+        parentId: 4,
+        name: 'gorm',
+      },
+    ],
+  },
+];
