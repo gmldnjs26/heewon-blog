@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 
 type Props = {
@@ -10,34 +10,31 @@ type Props = {
 
 const SC = {
   Accordion: styled('div')(({ theme }) => ({
-    transition: 'all 0.3s ease-in-out',
+    transition: 'all 0.25s ease-in-out',
     overflow: 'hidden',
-    '&.entering': {
-      height: '100px',
-      opacity: '1',
-    },
-    '&.entered': {
-      height: '100px',
-      opacity: '1',
-    },
-    '&.exiting': {
-      height: '0',
-      opacity: '0',
-    },
-    '&.exited': {
-      height: '0',
-      opacity: '0',
-    },
   })),
 };
 
 const Accordion: FC<Props> = ({ children, isOpen }) => {
+  const innerRef = useRef<HTMLDivElement>();
+  const styles = (state) => {
+    if (state === 'entering' || state === 'entered') {
+      return {
+        height: innerRef.current.scrollHeight + 'px',
+      };
+    } else {
+      return {
+        height: '0',
+      };
+    }
+  };
   return (
-    <Transition in={isOpen} timeout={300} mountOnEnter unmountOnExit>
-      {(state) => {
-        console.log(state);
-        return <SC.Accordion className={state}>{children}</SC.Accordion>;
-      }}
+    <Transition in={isOpen} timeout={250} mountOnEnter unmountOnExit>
+      {(state) => (
+        <SC.Accordion className={state} ref={innerRef} style={styles(state)}>
+          {children}
+        </SC.Accordion>
+      )}
     </Transition>
   );
 };
