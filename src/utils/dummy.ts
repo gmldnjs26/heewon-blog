@@ -70,9 +70,19 @@ export const categories: Category[] = [
     name: 'React',
     children: [
       {
-        id: 11,
-        parentId: 1,
-        name: 'Composition',
+        id: 21,
+        parentId: 2,
+        name: 'Redux',
+      },
+      {
+        id: 22,
+        parentId: 2,
+        name: 'ContextAPI',
+      },
+      {
+        id: 23,
+        parentId: 2,
+        name: 'Mox',
       },
     ],
   },

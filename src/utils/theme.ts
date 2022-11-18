@@ -9,7 +9,6 @@ export const roboto = Roboto({
   fallback: ['Helvetica', 'Arial', 'sans-serif'],
 });
 
-// Create a theme instance.
 const theme = createTheme({
   components: {
     MuiUseMediaQuery: {
@@ -22,27 +21,39 @@ const theme = createTheme({
   palette: {
     primary: {
       main: '#eec07b',
-      '100': '#f9ecd7',
-      '200': '#f8e5ca',
-      '300': '#f6dfbd',
-      '400': '#f3d2a2',
-      '500': '#d6ac6e',
+      '100': '#fdf8f1',
+      '200': '#fbf2e4',
+      '300': '#f8e5ca',
+      '400': '#f4d9af',
+      '500': '#f1cc95',
       '600': '#be9962',
-      '700': '#a68656',
-      '800': '#8e7349',
-      '900': '#77603d',
+      '700': '#8e7349',
+      '800': '#5f4c31',
+      '900': '#2f2618',
     },
     secondary: {
       main: '#d8c4aa',
-      '100': '#ebe1d4',
-      '200': '#e7dbcc',
-      '300': '#e3d5c3',
-      '400': '#dfcfbb',
-      '500': '#c2b099',
+      '100': '#fbf9f6',
+      '200': '#f7f3ee',
+      '300': '#efe7dd',
+      '400': '#e7dbcc',
+      '500': '#dfcfbb',
       '600': '#ac9c88',
-      '700': '#978976',
-      '800': '#817566',
-      '900': '#6c6255',
+      '700': '#817566',
+      '800': '#564e44',
+      '900': '#2b2722',
+    },
+    info: {
+      main: '#c9b0ba',
+      '100': '#fbf9f6',
+      '200': '#f7f3ee',
+      '300': '#efe7dd',
+      '400': '#e7dbcc',
+      '500': '#dfcfbb',
+      '600': '#ac9c88',
+      '700': '#817566',
+      '800': '#564e44',
+      '900': '#2b2722',
     },
     error: {
       main: red.A400,

@@ -20,7 +20,7 @@ const Accordion: FC<Props> = ({ children, isOpen }) => {
   const styles = (state) => {
     if (state === 'entering' || state === 'entered') {
       return {
-        height: innerRef.current.scrollHeight + 'px',
+        height: innerRef.current?.scrollHeight + 'px',
       };
     } else {
       return {
@@ -29,7 +29,8 @@ const Accordion: FC<Props> = ({ children, isOpen }) => {
     }
   };
   return (
-    <Transition in={isOpen} timeout={250} mountOnEnter unmountOnExit>
+    // https://github.com/reactjs/react-transition-group/issues/668#issuecomment-791003824
+    <Transition in={isOpen} timeout={250} nodeRef={innerRef} mountOnEnter unmountOnExit>
       {(state) => (
         <SC.Accordion className={state} ref={innerRef} style={styles(state)}>
           {children}
