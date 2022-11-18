@@ -27,15 +27,18 @@ const SC = {
     height: '100vh',
   })),
   Container: styled('div')(({ theme }) => ({
+    display: 'flex',
+  })),
+  Main: styled('div')(({ theme }) => ({
+    flex: '1',
     maxWidth: '1000px',
     margin: '0 auto',
     width: '100%',
   })),
   Sidebar: styled(Sidebar)(({ theme }) => ({
-    position: 'fixed',
-    top: '0',
-    left: '0',
     height: '100vh',
+    width: '300px',
+    borderRight: `1px solid ${theme.palette.secondary['300']}`,
   })),
 };
 
@@ -50,10 +53,12 @@ const App = ({ Component, pageProps, emotionCache = clientSideEmotionCache }: Ap
         <CssBaseline />
         <SC.App>
           <Header />
-          <SC.Sidebar />
           <SC.Container>
-            <Navigation styles={{ my: '16px' }} />
-            <Component {...pageProps} />
+            <SC.Sidebar />
+            <SC.Main>
+              <Navigation styles={{ my: '16px' }} />
+              <Component {...pageProps} />
+            </SC.Main>
           </SC.Container>
         </SC.App>
       </ThemeProvider>

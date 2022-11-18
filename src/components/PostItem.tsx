@@ -48,8 +48,8 @@ const SC = {
     minHeight: '64px',
     textOverflow: 'ellipsis',
     display: '-webkit-box',
-    '-webkit-line-clamp': '3',
-    '-webkit-box-orient': 'vertical',
+    WebkitLineClamp: '3',
+    WebkitBoxOrient: 'vertical',
   })),
   PostMetaInfo: styled('div')(({ theme }) => ({
     display: 'flex',

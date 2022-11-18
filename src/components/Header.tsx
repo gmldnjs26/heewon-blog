@@ -7,11 +7,10 @@ const SC = {
   Header: styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
     minHeight: '64px',
     padding: '0 16px',
     color: theme.palette.primary['200'],
-    borderBottom: `1px solid ${theme.palette.secondary['700']}`,
+    borderBottom: `1px solid ${theme.palette.secondary['300']}`,
   })),
   Link: styled(Link)(({ theme }) => ({
     fontSize: '1.4rem',
