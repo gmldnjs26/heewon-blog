@@ -2,6 +2,7 @@ import { sp_view } from '../utils/styleHelper';
 import { styled } from '@mui/material/styles';
 
 import Link from 'next/link';
+import Navigation from './Navigation';
 
 const SC = {
   Header: styled('div')(({ theme }) => ({
@@ -15,6 +16,7 @@ const SC = {
   Link: styled(Link)(({ theme }) => ({
     fontSize: '1.4rem',
     fontWeight: '600',
+    width: '300px',
     color: theme.palette.secondary['900'],
     '&:hover': {
       opacity: '0.7',
@@ -30,6 +32,7 @@ const Header = () => {
   return (
     <SC.Header>
       <SC.Link href="/">똑같은 삽질은 2번 하지 말자</SC.Link>
+      <Navigation styles={{ ml: '16px' }} />
     </SC.Header>
   );
 };

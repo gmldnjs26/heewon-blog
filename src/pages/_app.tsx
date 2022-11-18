@@ -16,7 +16,6 @@ type AppProps<P = any> = {
 import 'src/styles/reset.scss';
 import 'src/styles/common.scss';
 
-import Navigation from '../components/Navigation';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 
@@ -24,21 +23,26 @@ const SC = {
   App: styled('div')(({ theme }) => ({
     position: 'relative',
     background: '#f5f6f6',
-    height: '100vh',
+    minHeight: '100vh',
   })),
   Container: styled('div')(({ theme }) => ({
     display: 'flex',
   })),
   Main: styled('div')(({ theme }) => ({
     flex: '1',
+    padding: '32px 0',
+    maxHeight: 'calc(100vh - 64px)',
+    overflowY: 'scroll',
+  })),
+  MainWrapper: styled('div')(({ theme }) => ({
     maxWidth: '1000px',
     margin: '0 auto',
-    width: '100%',
   })),
   Sidebar: styled(Sidebar)(({ theme }) => ({
-    height: '100vh',
+    height: '100%',
     width: '300px',
     borderRight: `1px solid ${theme.palette.secondary['300']}`,
+    overflowY: 'scroll',
   })),
 };
 
@@ -56,8 +60,9 @@ const App = ({ Component, pageProps, emotionCache = clientSideEmotionCache }: Ap
           <SC.Container>
             <SC.Sidebar />
             <SC.Main>
-              <Navigation styles={{ my: '16px' }} />
-              <Component {...pageProps} />
+              <SC.MainWrapper>
+                <Component {...pageProps} />
+              </SC.MainWrapper>
             </SC.Main>
           </SC.Container>
         </SC.App>
