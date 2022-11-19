@@ -23,7 +23,7 @@
 
 - 클라우드는 AWS를 이용
 - 웹서버는 Nginx DB는 MySQL
-- 백엔드는 아직 정하진 않았지만 node나 go를 이용할까 아니면 serverless?
+- 백엔드는 Go, Fiber, Gorm
 - 프론트는 관리자화면 클라이언트화면 둘다 리액트로 하고자 하는데 관리자 화면은 vue로 할지도?
 - Material UI, Styled Components 사용
 
@@ -37,3 +37,9 @@ https://drive.google.com/file/d/1W5-BhfUbjhmsByyS4zp85V20y9neYsT8/view?usp=shari
 - 카테고리마다 로고를 둬서 로고의 이미지는 로고 아이디로 추적 가능하게 한다.
 - 카테고리에 대한 마스터 정보를 프론트에서 유지 하도록 하면 글 리스트를 갖고 올때 조인 안해도 될듯하다.
 - 카테고리 리스트는 왼쪽 책갈피 정보는 오른쪽으로 하도록 한다.
+- 글 리스트를 볼 때 contents 내용들은 태그가 제거된 내용으로 미리보기를 제공
+- 글 상세에서는 저장된 태그와 글 내용 그대로 렌더링해서 보여주기
+
+| 글 작성                                                                                        | 글 상세                                                                                         |
+| ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| ![글 작성](https://github.com/gmldnjs26/react-heewon-blog/blob/develop/img/write.png?raw=true) | ![글 상세](https://github.com/gmldnjs26/react-heewon-blog/blob/develop/img/detail.png?raw=true) |
