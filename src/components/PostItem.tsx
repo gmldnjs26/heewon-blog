@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { boxShadow } from '../utils/styleHelper';
 import ChatIcon from '@mui/icons-material/Chat';
 import { styled } from '@mui/material/styles';
+import { useRouter } from 'next/router';
 
 type Props = {
   className?: string;
@@ -27,6 +28,10 @@ const SC = {
     background: '#fff',
     borderRadius: '3px',
     boxShadow: [boxShadow],
+    cursor: 'pointer',
+    '&:hover': {
+      opacity: '0.7',
+    },
   })),
   PostImageWrapper: styled('div')(({ theme }) => ({
     background: theme.palette.primary.main,
@@ -67,8 +72,12 @@ const SC = {
 };
 
 const PostItem: FC<Props> = ({ className, post }) => {
+  const router = useRouter();
+  const clickHandler = () => {
+    router.push(`/post/${post.id}`);
+  };
   return (
-    <SC.PostItem className={className}>
+    <SC.PostItem className={className} onClick={clickHandler}>
       <SC.PostImageWrapper>
         <img src="#" />
       </SC.PostImageWrapper>

@@ -1,11 +1,6 @@
-import { Fragment } from 'react';
 import PostList from '../components/PostList';
 const Home = () => {
-  return (
-    <Fragment>
-      <PostList />
-    </Fragment>
-  );
+  return <PostList />;
 };
 
 export default Home;
