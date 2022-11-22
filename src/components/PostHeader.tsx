@@ -22,8 +22,8 @@ const SC = {
     marinBottom: '32px',
   })),
   PostTitle: styled('h1')(({ theme }) => ({
-    fontSize: '24px',
-    fontWeight: '600',
+    fontSize: '32px',
+    fontWeight: '700',
   })),
 };
 

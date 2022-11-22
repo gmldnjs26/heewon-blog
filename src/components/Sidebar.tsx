@@ -72,7 +72,7 @@ const Sidebar: FC<Props> = ({ className }) => {
       });
     } else {
       setSelectedCategory(category);
-      router.push(`/post/${category.id}`);
+      router.push(`/?category=${category.id}`);
     }
   };
 

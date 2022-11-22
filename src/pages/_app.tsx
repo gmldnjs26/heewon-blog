@@ -32,17 +32,16 @@ const SC = {
     flex: '1',
     padding: '32px 0',
     maxHeight: 'calc(100vh - 64px)',
-    overflowY: 'scroll',
+    overflowY: 'auto',
   })),
   MainWrapper: styled('div')(({ theme }) => ({
     maxWidth: '1000px',
     margin: '0 auto',
   })),
   Sidebar: styled(Sidebar)(({ theme }) => ({
-    height: '100%',
+    height: 'calc(100vh - 64px)',
     width: '300px',
     borderRight: `1px solid ${theme.palette.secondary['300']}`,
-    overflowY: 'scroll',
   })),
 };
 
