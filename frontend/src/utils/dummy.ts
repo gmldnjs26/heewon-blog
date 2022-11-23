@@ -2,7 +2,97 @@ export const postList = [
   {
     id: 1,
     title: '이것은 타이틀이다 1',
-    contents: 'a',
+    contents: `
+# Title1
+## Title2
+### Title3
+A paragraph with *emphasis* and **strong importance**.
+
+> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
+
+* Lists
+* [ ] todo
+* [x] done
+
+A table:
+
+| a | b |
+| - | - |
+| a | b |
+| a | b |
+
+~~~js
+  const test = "string"
+  const test2 = 12
+  function test3 {
+    console.log("test2", test)
+  }
+  console.log("test")
+~~~
+~~~js
+  const test = "string"
+  const test2 = 12
+  function test3 {
+    console.log("test2", test)
+  }
+  console.log("test")
+~~~
+~~~js
+  const test = "string"
+  const test2 = 12
+  function test3 {
+    console.log("test2", test)
+  }
+  console.log("test")
+~~~
+~~~js
+  const test = "string"
+  const test2 = 12
+  function test3 {
+    console.log("test2", test)
+  }
+  console.log("test")
+~~~
+~~~js
+  const test = "string"
+  const test2 = 12
+  function test3 {
+    console.log("test2", test)
+  }
+  console.log("test")
+~~~
+~~~js
+  const test = "string"
+  const test2 = 12
+  function test3 {
+    console.log("test2", test)
+  }
+  console.log("test")
+~~~
+~~~js
+  const test = "string"
+  const test2 = 12
+  function test3 {
+    console.log("test2", test)
+  }
+  console.log("test")
+~~~
+
+~~~ts
+  const test: any = "string"
+  const test2 = 12
+  function test3 {
+    console.log("test2", test)
+  }
+  console.log("test")
+~~~
+
+~~~java
+  class ClassName {
+    private int num = 3;
+  }
+~~~
+`,
     categoryId: 0,
     categoryName: 'Vue',
     createdAt: '2022-09-11',

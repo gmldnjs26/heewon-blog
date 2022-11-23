@@ -3,21 +3,11 @@ import { boxShadow } from '../utils/styleHelper';
 import ChatIcon from '@mui/icons-material/Chat';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
+import { Post } from '../types/global';
 
 type Props = {
   className?: string;
-  post: {
-    id: number;
-    title: string;
-    contents: string;
-    categoryId: number;
-    categoryName: string;
-    createdAt: string;
-    comments: {
-      writer: string;
-      contents: string;
-    }[];
-  };
+  post: Post;
 };
 
 const SC = {
