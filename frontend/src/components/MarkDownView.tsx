@@ -49,13 +49,25 @@ const MarkDownView: FC<Props> = ({ markdown }) => {
       remarkPlugins={[remarkGfm]}
       components={{
         h1({ className, children, ...props }) {
-          return <SC.H1 className={className}>{children}</SC.H1>;
+          return (
+            <SC.H1 id={children as string} className={className}>
+              {children}
+            </SC.H1>
+          );
         },
         h2({ className, children, ...props }) {
-          return <SC.H2 className={className}>{children}</SC.H2>;
+          return (
+            <SC.H2 id={children as string} className={className}>
+              {children}
+            </SC.H2>
+          );
         },
         h3({ className, children, ...props }) {
-          return <SC.H3 className={className}>{children}</SC.H3>;
+          return (
+            <SC.H3 id={children as string} className={className}>
+              {children}
+            </SC.H3>
+          );
         },
         table({ className, children, ...props }) {
           return <SC.Table className={className}>{children}</SC.Table>;
