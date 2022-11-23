@@ -35,8 +35,11 @@ const SC = {
     borderRadius: '3px',
     cursor: 'pointer',
     '&.active': {
-      color: theme.palette.primary['800'],
+      fontWeight: '600',
       background: theme.palette.primary['300'],
+    },
+    '&:hover': {
+      background: theme.palette.primary['200'],
     },
   })),
   ExpandMoreIcon: styled(ExpandMoreIcon)(({ theme }) => ({
