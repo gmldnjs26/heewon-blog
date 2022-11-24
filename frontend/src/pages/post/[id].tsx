@@ -18,7 +18,7 @@ const SC = {
   Main: styled('div')(({ theme }) => ({
     flex: '1',
   })),
-  PostNav: styled(PostNavigation)(({ theme }) => ({
+  PostNavigation: styled(PostNavigation)(({ theme }) => ({
     position: 'sticky',
     top: 'calc(1.5rem + 70px)',
     marginLeft: '24px',
@@ -33,7 +33,7 @@ const Post: FC<Props> = ({ post }) => {
         <PostHeader post={post} />
         <PostBody post={post} />
       </SC.Main>
-      <SC.PostNav postContents={post.contents} />
+      <SC.PostNavigation postContents={post.contents} />
     </SC.Post>
   );
 };
