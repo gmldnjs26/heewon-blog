@@ -30,7 +30,7 @@ const SC = {
   })),
   Main: styled('div')(({ theme }) => ({
     flex: '1',
-    padding: '32px 0',
+    padding: '40px 0',
     minHeight: 'calc(100vh - 64px)',
   })),
   MainWrapper: styled('div')(({ theme }) => ({

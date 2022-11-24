@@ -11,7 +11,8 @@ const SC = {
     minHeight: '64px',
     padding: '0 16px',
     color: theme.palette.primary['200'],
-    borderBottom: `1px solid ${theme.palette.secondary['300']}`,
+    //  borderBottom: `1px solid ${theme.palette.secondary['300']}`,
+    boxShadow: '0 3px 8px 0 rgb(116 129 141 / 10%)',
   })),
   Link: styled(Link)(({ theme }) => ({
     fontSize: '1.4rem',

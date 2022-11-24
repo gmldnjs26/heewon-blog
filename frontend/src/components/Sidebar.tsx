@@ -11,7 +11,7 @@ type Props = {
 
 const SC = {
   Sidebar: styled('div')(({ theme }) => ({
-    padding: '8px 16px',
+    padding: '16px',
   })),
   SidebarLinkList: styled('ul')(({ theme }) => ({})),
   SidebarLinkItem: styled('li')(({ theme }) => ({
