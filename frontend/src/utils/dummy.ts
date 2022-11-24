@@ -3,12 +3,18 @@ export const postList = [
     id: 1,
     title: '이것은 타이틀이다 1',
     contents: `
-# Title1
-## Title2
-### Title3
+# 이 기사에 대해서
+## 좀더 그럴싸한 제목을 적어보고자한다.
+## 이건 목차 2번으로
+### 이건 목차의 목차 3번으로
+## 좀 더 그럴싸한 부제목2
+
+
 A paragraph with *emphasis* and **strong importance**.
 
 > A block quote with ~strikethrough~ and a URL: https://reactjs.org.
+
+## 좀 더 그럴싸한 부제목3
 
 * Lists
 * [ ] todo
@@ -21,6 +27,8 @@ A table:
 | a | b |
 | a | b |
 
+## 좀 더 그럴싸한 부제목4
+
 ~~~js
   const test = "string"
   const test2 = 12
@@ -53,6 +61,9 @@ A table:
   }
   console.log("test")
 ~~~
+
+## 좀 더 그럴싸한 부제목6
+
 ~~~js
   const test = "string"
   const test2 = 12
