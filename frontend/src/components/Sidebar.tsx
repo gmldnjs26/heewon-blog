@@ -11,7 +11,10 @@ type Props = {
 
 const SC = {
   Sidebar: styled('div')(({ theme }) => ({
-    padding: '16px',
+    padding: '24px 8px',
+    color: theme.palette.primary['800'],
+    fontWeight: '400',
+    fontSize: '14px',
   })),
   SidebarLinkList: styled('ul')(({ theme }) => ({})),
   SidebarLinkItem: styled('li')(({ theme }) => ({
@@ -22,28 +25,40 @@ const SC = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingLeft: '8px',
+    borderRadius: '3px',
     height: '24px',
-    fontWeight: '600',
+    '&:hover': {
+      color: theme.palette.primary['900'],
+      background: theme.palette.primary['200'],
+    },
+    '&.active': {
+      fontWeight: '600',
+      color: theme.palette.primary['900'],
+      background: theme.palette.primary['300'],
+    },
   })),
   SidebarLinkItemBody: styled('ul')(({ theme }) => ({
     paddingTop: '8px',
   })),
   SidebarLinkItemBodyItem: styled('li')(({ theme }) => ({
-    fontSize: '15px',
     transition: 'all 0.25s ease-in-out',
-    padding: '2px 0 2px 12px',
+    padding: '2px 0 2px 16px',
     borderRadius: '3px',
     cursor: 'pointer',
     '&.active': {
       fontWeight: '600',
+      color: theme.palette.primary['900'],
       background: theme.palette.primary['300'],
     },
     '&:hover': {
+      color: theme.palette.primary['900'],
       background: theme.palette.primary['200'],
     },
   })),
   ExpandMoreIcon: styled(ExpandMoreIcon)(({ theme }) => ({
     transition: 'transform 0.25s ease-in-out',
+    fontSize: '18px',
     '&.opened': {
       transform: 'rotate(180deg)',
     },
@@ -85,6 +100,7 @@ const Sidebar: FC<Props> = ({ className }) => {
         {categories.map((category) => (
           <SC.SidebarLinkItem key={category.id}>
             <SC.SidebarLinkItemTop
+              className={category.id === selectedCategory.id && 'active'}
               onClick={linkItemClickHanlder.bind(this, category.children?.length > 0, category)}
             >
               {category.name}

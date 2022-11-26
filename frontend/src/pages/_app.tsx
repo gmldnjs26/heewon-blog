@@ -6,6 +6,8 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import theme from '../utils/theme';
 import createEmotionCache from '../utils/createEmotionCache';
 
+import { sp_view } from '../utils/styleHelper';
+
 const clientSideEmotionCache = createEmotionCache();
 
 type AppProps<P = any> = {
@@ -38,9 +40,23 @@ const SC = {
     margin: '0 auto',
   })),
   Sidebar: styled(Sidebar)(({ theme }) => ({
+    transition: 'all 0.25s ease-in-out',
     height: 'calc(100vh - 64px)',
     width: '300px',
     borderRight: `1px solid ${theme.palette.secondary['300']}`,
+    [sp_view]: {
+      position: 'fixed',
+      width: '0',
+      opacity: '0',
+      top: '0',
+      left: '0',
+      zIndex: '999',
+      background: '#fff',
+      '&.active': {
+        width: '300px',
+        opacity: '1',
+      },
+    },
   })),
 };
 

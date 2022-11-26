@@ -55,6 +55,9 @@ const theme = createTheme({
       '800': '#564e44',
       '900': '#2b2722',
     },
+    grey: {
+      '100': '#48434f',
+    },
     error: {
       main: red.A400,
     },

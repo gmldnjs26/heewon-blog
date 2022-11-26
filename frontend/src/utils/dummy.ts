@@ -190,7 +190,7 @@ export const categories: Category[] = [
   {
     id: 3,
     parentId: 0,
-    name: '일기',
+    name: 'Diary',
   },
   {
     id: 4,
