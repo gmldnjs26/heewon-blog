@@ -4,7 +4,8 @@ import { FC, ReactNode } from 'react';
 type Props = {
   className?: string;
   children?: ReactNode;
-  postContents: string;
+  navInfo: { deep: number; text: string }[];
+  activeNavId: string;
 };
 
 const SC = {
@@ -16,6 +17,9 @@ const SC = {
     '&:hover': {
       background: theme.palette.primary['200'],
     },
+    '&.active': {
+      background: theme.palette.primary['300'],
+    },
   })),
   PostNavH2: styled('div')(({ theme }) => ({
     borderRadius: '3px',
@@ -23,12 +27,18 @@ const SC = {
     '&:hover': {
       background: theme.palette.primary['200'],
     },
+    '&.active': {
+      background: theme.palette.primary['300'],
+    },
   })),
   PostNavH3: styled('div')(({ theme }) => ({
     borderRadius: '3px',
     marginLeft: '20px',
     '&:hover': {
       background: theme.palette.primary['200'],
+    },
+    '&.active': {
+      background: theme.palette.primary['300'],
     },
   })),
   PostNavLink: styled('a')(({ theme }) => ({
@@ -42,58 +52,28 @@ const SC = {
   })),
 };
 
-const PostNavigation: FC<Props> = ({ className, postContents }) => {
-  const navInfo = postContents
-    .split('\n')
-    .filter((item) => {
-      // temp[0]가 #이 되면 markdown 규칙에서 h1이 되는것
-      const temp = item.split(' ');
-      if (temp.length > 0 && ['#', '##', '###'].includes(temp[0])) return true;
-      return false;
-    })
-    .map((item) => {
-      const temp = item.split(' ');
-      if (temp.length > 0) {
-        if (temp[0] === '#') {
-          return {
-            deep: 1,
-            text: temp.splice(1).join(' ').toString(),
-          };
-        }
-        if (temp[0] === '##') {
-          return {
-            deep: 2,
-            text: temp.splice(1).join(' ').toString(),
-          };
-        }
-        if (temp[0] === '###') {
-          return {
-            deep: 3,
-            text: temp.splice(1).join(' ').toString(),
-          };
-        }
-      }
-    });
+const PostNavigation: FC<Props> = ({ className, navInfo, activeNavId }) => {
+  console.log(activeNavId);
   return (
     <SC.PostNavigation className={className}>
       {navInfo.map((info, idx) => {
         if (info.deep === 1) {
           return (
-            <SC.PostNavH1 key={idx}>
+            <SC.PostNavH1 className={activeNavId === info.text ? 'active' : ''} key={idx}>
               <SC.PostNavLink href={'#' + info.text}>{info.text}</SC.PostNavLink>
             </SC.PostNavH1>
           );
         }
         if (info.deep === 2) {
           return (
-            <SC.PostNavH2 key={idx}>
+            <SC.PostNavH2 className={activeNavId === info.text ? 'active' : ''} key={idx}>
               <SC.PostNavLink href={'#' + info.text}>{info.text}</SC.PostNavLink>
             </SC.PostNavH2>
           );
         }
         if (info.deep === 3) {
           return (
-            <SC.PostNavH3 key={idx}>
+            <SC.PostNavH3 className={activeNavId === info.text ? 'active' : ''} key={idx}>
               <SC.PostNavLink href={'#' + info.text}>{info.text}</SC.PostNavLink>
             </SC.PostNavH3>
           );

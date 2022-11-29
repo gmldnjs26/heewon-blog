@@ -100,12 +100,12 @@ const Sidebar: FC<Props> = ({ className }) => {
         {categories.map((category) => (
           <SC.SidebarLinkItem key={category.id}>
             <SC.SidebarLinkItemTop
-              className={category.id === selectedCategory.id && 'active'}
+              className={category.id === selectedCategory.id ? 'active' : ''}
               onClick={linkItemClickHanlder.bind(this, category.children?.length > 0, category)}
             >
               {category.name}
               {category.children?.length > 0 && (
-                <SC.ExpandMoreIcon className={openIdList.includes(category.id) && 'opened'} />
+                <SC.ExpandMoreIcon className={openIdList.includes(category.id) ? 'opened' : ''} />
               )}
             </SC.SidebarLinkItemTop>
             {category.children?.length > 0 && (
@@ -114,7 +114,7 @@ const Sidebar: FC<Props> = ({ className }) => {
                   {category.children.map((childCategory) => (
                     <SC.SidebarLinkItemBodyItem
                       key={childCategory.id}
-                      className={childCategory.id === selectedCategory.id && 'active'}
+                      className={childCategory.id === selectedCategory.id ? 'active' : ''}
                       onClick={linkItemClickHanlder.bind(this, false, childCategory)}
                     >
                       {childCategory.name}

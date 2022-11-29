@@ -15,8 +15,8 @@ export const useIntersectionObserver = (options = IODefaultOptions) => {
     doWhenIntersect: DoWhenIntersectFunction,
   ) => {
     observer = new IntersectionObserver(doWhenIntersect, options);
-    targets.forEach((e) => {
-      observer.observe(e);
+    targets.forEach((el) => {
+      observer.observe(el);
     });
   };
 
