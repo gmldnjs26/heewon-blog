@@ -71,16 +71,10 @@ const Post: FC<Props> = ({ post }) => {
     const targetElements = navInfo.map((info) => {
       return document.getElementById(info.text);
     });
-    console.log(targetElements);
     intersectionObserver.addIntersectHandler(targetElements, (entries) => {
-      console.log('entries', entries);
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (entry.target?.id) {
-            setActiveId((prev) => {
-              if (prev !== entry.target?.id) return entry.target?.id;
-            });
-          }
+        if (entry.isIntersecting && entry.target?.id) {
+          setActiveId(entry.target?.id);
         }
       });
     });
