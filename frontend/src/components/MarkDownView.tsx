@@ -1,3 +1,4 @@
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import { FC, ReactNode } from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -43,7 +44,7 @@ const SC = {
   })),
 };
 
-const MarkDownView: FC<Props> = ({ markdown }) => {
+const MarkDownView: FC<Props> = React.memo(function MarkdownView({ markdown }) {
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
@@ -98,6 +99,6 @@ const MarkDownView: FC<Props> = ({ markdown }) => {
       {markdown}
     </ReactMarkdown>
   );
-};
+});
 
 export default MarkDownView;

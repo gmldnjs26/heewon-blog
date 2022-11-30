@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import PostHeader from '../../components/PostHeader';
 import PostBody from '../../components/PostBody';
@@ -29,59 +29,65 @@ const SC = {
 };
 
 const Post: FC<Props> = ({ post }) => {
-  const intersectionObserver = useIntersectionObserver({
-    root: null, // 今回はビューポートをルート要素とする
-    rootMargin: '0px 0px -95% 0px',
-    threshold: 0.3, // 가시성 30%
-  });
   const [activeId, setActiveId] = useState('');
+  const navInfo = useMemo(() => {
+    return post.contents
+      .split('\n')
+      .filter((item) => {
+        // temp[0]가 #이 되면 markdown 규칙에서 h1이 되는것
+        const temp = item.split(' ');
+        if (temp.length > 0 && ['#', '##', '###'].includes(temp[0])) return true;
+        return false;
+      })
+      .map((item) => {
+        const temp = item.split(' ');
+        if (temp.length > 0) {
+          if (temp[0] === '#') {
+            return {
+              deep: 1,
+              text: temp.splice(1).join(' ').toString(),
+            };
+          }
+          if (temp[0] === '##') {
+            return {
+              deep: 2,
+              text: temp.splice(1).join(' ').toString(),
+            };
+          }
+          if (temp[0] === '###') {
+            return {
+              deep: 3,
+              text: temp.splice(1).join(' ').toString(),
+            };
+          }
+        }
+      });
+  }, [post]);
 
-  const navInfo = post.contents
-    .split('\n')
-    .filter((item) => {
-      // temp[0]가 #이 되면 markdown 규칙에서 h1이 되는것
-      const temp = item.split(' ');
-      if (temp.length > 0 && ['#', '##', '###'].includes(temp[0])) return true;
-      return false;
-    })
-    .map((item) => {
-      const temp = item.split(' ');
-      if (temp.length > 0) {
-        if (temp[0] === '#') {
-          return {
-            deep: 1,
-            text: temp.splice(1).join(' ').toString(),
-          };
-        }
-        if (temp[0] === '##') {
-          return {
-            deep: 2,
-            text: temp.splice(1).join(' ').toString(),
-          };
-        }
-        if (temp[0] === '###') {
-          return {
-            deep: 3,
-            text: temp.splice(1).join(' ').toString(),
-          };
-        }
-      }
-    });
+  const { addIntersectHandler, removeIntersectHandler } = useIntersectionObserver();
   useEffect(() => {
     const targetElements = navInfo.map((info) => {
       return document.getElementById(info.text);
     });
-    intersectionObserver.addIntersectHandler(targetElements, (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.target?.id) {
-          setActiveId(entry.target?.id);
-        }
-      });
-    });
+    addIntersectHandler(
+      targetElements,
+      {
+        root: null,
+        rootMargin: '0px 0px -95% 0px',
+        threshold: 0,
+      },
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.target?.id) {
+            setActiveId(entry.target?.id);
+          }
+        });
+      },
+    );
     return () => {
-      intersectionObserver.removeIntersectHandler();
+      removeIntersectHandler();
     };
-  }, [intersectionObserver, navInfo]);
+  }, [addIntersectHandler, removeIntersectHandler, navInfo]);
   return (
     <SC.Post>
       <SC.Main>
