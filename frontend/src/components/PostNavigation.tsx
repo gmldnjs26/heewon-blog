@@ -53,7 +53,6 @@ const SC = {
 };
 
 const PostNavigation: FC<Props> = ({ className, navInfo, activeNavId }) => {
-  console.log(activeNavId);
   return (
     <SC.PostNavigation className={className}>
       {navInfo.map((info, idx) => {
