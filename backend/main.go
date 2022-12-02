@@ -1,8 +1,15 @@
 package main
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"heewon-blog/src/database"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 func main() {
+	// DB
+	database.Connect()
+
 	app := fiber.New()
 
 	app.Get("/", func(c *fiber.Ctx) error {
