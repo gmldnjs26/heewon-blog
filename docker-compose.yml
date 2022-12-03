@@ -9,3 +9,18 @@ services:
       - "5000:5000"
     volumes:
       - ./backend:/app
+    depends_on:
+      - db
+  db:
+    platform: linux/x86_64 # M1은 5.7 설치를 위해 이렇게 해야한다.
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hwblog
+      MYSQL_USER: ghw
+      MYSQL_PASSWORD: heewon
+    volumes:
+      - .dbdata:/var/lib/mysql
+    ports:
+      - 3306:3306
