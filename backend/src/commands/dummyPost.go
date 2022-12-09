@@ -16,7 +16,7 @@ func main() {
 		product := models.Post{
 			CategoryId:      int16(rand.Int()),
 			Title:           faker.Username(),
-			Contents:        faker.Username(),
+			Contents:        "<h1>ssaced</h1>",
 			PreviewContents: faker.Username(),
 			Password:        faker.Username(),
 			Status:          1,
