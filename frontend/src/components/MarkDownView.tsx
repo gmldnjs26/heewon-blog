@@ -31,6 +31,28 @@ const SC = {
     lineHeight: '1.4',
     margin: '32px 0 16px',
   })),
+  Ul: styled('ul')(({ theme }) => ({
+    listStyleType: 'disc',
+    lineHeight: '1.9',
+    paddingLeft: '24px',
+    margin: '24px 0',
+    ul: {
+      listStyleType: 'circle',
+      margin: 0,
+      ul: {
+        listStyleType: 'square',
+      },
+    },
+  })),
+  Blockquote: styled('blockquote')(({ theme }) => ({
+    borderLeft: '4px solid #dfe0e0',
+    color: 'rgba(0,0,0,.6)',
+    padding: '12px 0 12px 16px',
+    margin: '24px 0',
+    p: {
+      whiteSpace: 'pre-line',
+    },
+  })),
   Strong: styled('strong')(({ theme }) => ({})),
   Table: styled('table')(({ theme }) => ({
     border: '1px solid black',
@@ -44,9 +66,10 @@ const SC = {
   })),
 };
 
-const MarkDownView: FC<Props> = React.memo(function MarkdownView({ markdown }) {
+const MarkDownView: FC<Props> = React.memo(function MarkdownView({ className, markdown }) {
   return (
     <ReactMarkdown
+      className={className}
       remarkPlugins={[remarkGfm]}
       components={{
         h1({ className, children, ...props }) {
@@ -69,6 +92,12 @@ const MarkDownView: FC<Props> = React.memo(function MarkdownView({ markdown }) {
               {children}
             </SC.H3>
           );
+        },
+        ul({ className, children, ...props }) {
+          return <SC.Ul className={className}>{children}</SC.Ul>;
+        },
+        blockquote({ className, children, ...props }) {
+          return <SC.Blockquote className={className}>{children}</SC.Blockquote>;
         },
         table({ className, children, ...props }) {
           return <SC.Table className={className}>{children}</SC.Table>;
