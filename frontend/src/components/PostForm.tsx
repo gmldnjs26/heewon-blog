@@ -1,0 +1,106 @@
+import { styled } from '@mui/material/styles';
+import { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
+import MarkDownView from './MarkDownView';
+import { getLineAndCol } from '../utils/editHelper';
+
+type Props = {
+  className?: string;
+};
+
+const SC = {
+  PostFormContainer: styled('div')(({ theme }) => ({
+    marginBottom: '32px',
+  })),
+  PostFormHeader: styled('div')(({ theme }) => ({
+    marginBottom: '24px',
+    input: {
+      width: '100%',
+      appearance: 'none',
+      padding: '8px 12px',
+      fontSize: '24px',
+      borderRadius: '6px',
+      border: '1px solid rgba(0, 0, 0, 0.12)',
+    },
+  })),
+  PostFormBody: styled('div')(({ theme }) => ({
+    display: 'flex',
+    columnGap: '16px',
+    height: 'calc(100vh - 200px)',
+  })),
+  PostFormSection: styled('div')(({ theme }) => ({
+    flex: 1,
+    background: 'white',
+    padding: '8px 12px',
+    borderRadius: '6px',
+    border: '1px solid rgba(0, 0, 0, 0.12)',
+    textarea: {
+      width: '100%',
+      height: '100%',
+      appearance: 'none',
+      border: 'none',
+      fontSize: '16px',
+      resize: 'none',
+    },
+  })),
+};
+
+const PostForm: FC<Props> = ({ className }) => {
+  const [postTitle, setPostTitle] = useState('');
+  const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    setPostTitle(e.currentTarget.value);
+  };
+
+  const [postContents, setPostContents] = useState('');
+  const handleChangeContents = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setPostContents(e.currentTarget.value);
+  };
+  const handleKeyDownContents = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    const { keyCode, key, currentTarget } = e;
+    if (keyCode === 13 || key === 'Enter') {
+      const text = currentTarget.value;
+      const curPos = currentTarget.selectionStart;
+      const lineInfo = getLineAndCol(text, curPos);
+
+      // "- "을 체크
+      const isSymbol = lineInfo.curLine.match(/^(\s*?)\- /);
+
+      if (isSymbol) {
+        // "- " 뒤로 아무 문자도 없으면 심볼추가안함
+        if (/^(\s*?)\- $/.test(lineInfo.curLine)) {
+          return;
+        }
+        setTimeout(() => {
+          setPostContents((prev) => {
+            return prev + isSymbol[0];
+          });
+        });
+      }
+    }
+  };
+  return (
+    <SC.PostFormContainer>
+      <SC.PostFormHeader>
+        <input
+          type="text"
+          value={postTitle}
+          onChange={handleChangeTitle}
+          placeholder="제목을 입력하세요"
+        />
+      </SC.PostFormHeader>
+      <SC.PostFormBody>
+        <SC.PostFormSection>
+          <textarea
+            value={postContents}
+            onChange={handleChangeContents}
+            onKeyDown={handleKeyDownContents}
+          ></textarea>
+        </SC.PostFormSection>
+        <SC.PostFormSection>
+          <MarkDownView markdown={postContents} />
+        </SC.PostFormSection>
+      </SC.PostFormBody>
+    </SC.PostFormContainer>
+  );
+};
+
+export default PostForm;
