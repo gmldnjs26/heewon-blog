@@ -31,7 +31,7 @@ const SC = {
 const Post: FC<Props> = ({ post }) => {
   const [activeId, setActiveId] = useState('');
   const navInfo = useMemo(() => {
-    return post.contents
+    return postList[0].contents
       .split('\n')
       .filter((item) => {
         // temp[0]가 #이 되면 markdown 규칙에서 h1이 되는것
@@ -62,7 +62,7 @@ const Post: FC<Props> = ({ post }) => {
           }
         }
       });
-  }, [post]);
+  }, []);
 
   const { addIntersectHandler, removeIntersectHandler } = useIntersectionObserver();
   useEffect(() => {
@@ -91,8 +91,8 @@ const Post: FC<Props> = ({ post }) => {
   return (
     <SC.Post>
       <SC.Main>
-        <PostHeader post={post} />
-        <PostBody post={post} />
+        <PostHeader post={postList[0]} />
+        <PostBody post={postList[0]} />
       </SC.Main>
       <SC.PostNavigation navInfo={navInfo} activeNavId={activeId} />
     </SC.Post>
@@ -104,12 +104,21 @@ export default Post;
 export async function getServerSideProps(context) {
   const { id } = context.query;
 
-  // fetch data and can use req.params or etc..
-  const post = postList.find((post) => post.id === Number(id));
+  // const result = await fetch('http://localhost:5000/posts', {
+  //   method: 'get',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  // });
+  // const data = await result.json();
+  // console.log(data);
+
+  // // fetch data and can use req.params or etc..
+  // const post = postList.find((post) => post.id === Number(id));
 
   return {
     props: {
-      post,
+      post: [],
     },
   };
 }

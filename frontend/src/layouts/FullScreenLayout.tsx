@@ -18,7 +18,7 @@ const SC = {
   })),
   Main: styled('div')(({ theme }) => ({
     flex: '1',
-    padding: '40px 0',
+    paddingTop: '40px',
     minHeight: 'calc(100vh - 64px)',
   })),
   MainWrapper: styled('div')(({ theme }) => ({

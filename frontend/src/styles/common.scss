@@ -11,15 +11,33 @@ body {
 
 @for $i from 1 through 9 {
   .mb-#{$i} {
-    margin-bottom: $i * 8;
+    margin-bottom: $i * 8px;
   }
   .mt-#{$i} {
-    margin-top: $i * 8;
+    margin-top: $i * 8px;
+  }
+  .ml-#{$i} {
+    margin-left: $i * 8px;
+  }
+  .mr-#{$i} {
+    margin-right: $i * 8px;
+  }
+  .m-#{$i} {
+    margin: $i * 8px;
   }
   .pb-#{$i} {
-    padding-bottom: $i * 8;
+    padding-bottom: $i * 8px;
   }
   .pt-#{$i} {
-    padding-top: $i * 8;
+    padding-top: $i * 8px;
+  }
+  .pl-#{$i} {
+    padding-left: $i * 8px;
+  }
+  .pr-#{$i} {
+    padding-right: $i * 8px;
+  }
+  .p-#{$i} {
+    padding: $i * 8px;
   }
 }

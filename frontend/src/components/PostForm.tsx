@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
 import MarkDownView from './MarkDownView';
+import Button from './Button';
 import { getLineAndCol } from '../utils/editHelper';
 
 type Props = {
@@ -8,9 +9,7 @@ type Props = {
 };
 
 const SC = {
-  PostFormContainer: styled('div')(({ theme }) => ({
-    marginBottom: '32px',
-  })),
+  PostFormContainer: styled('div')(({ theme }) => ({})),
   PostFormHeader: styled('div')(({ theme }) => ({
     marginBottom: '24px',
     input: {
@@ -25,7 +24,7 @@ const SC = {
   PostFormBody: styled('div')(({ theme }) => ({
     display: 'flex',
     columnGap: '16px',
-    height: 'calc(100vh - 200px)',
+    height: 'calc(100vh - 250px)',
   })),
   PostFormSection: styled('div')(({ theme }) => ({
     flex: 1,
@@ -33,6 +32,7 @@ const SC = {
     padding: '8px 12px',
     borderRadius: '6px',
     border: '1px solid rgba(0, 0, 0, 0.12)',
+    overflow: 'scroll',
     textarea: {
       width: '100%',
       height: '100%',
@@ -41,6 +41,10 @@ const SC = {
       fontSize: '16px',
       resize: 'none',
     },
+  })),
+  PostFormFooter: styled('div')(({ theme }) => ({
+    marginTop: '24px',
+    textAlign: 'right',
   })),
 };
 
@@ -99,6 +103,9 @@ const PostForm: FC<Props> = ({ className }) => {
           <MarkDownView markdown={postContents} />
         </SC.PostFormSection>
       </SC.PostFormBody>
+      <SC.PostFormFooter>
+        <Button>작성하기</Button>
+      </SC.PostFormFooter>
     </SC.PostFormContainer>
   );
 };
