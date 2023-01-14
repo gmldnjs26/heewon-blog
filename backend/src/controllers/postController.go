@@ -28,28 +28,25 @@ func Posts(c *fiber.Ctx) error {
 }
 
 func CreatePost(c *fiber.Ctx) error {
-	var data map[string]string
+	payload := struct {
+		CategoryId      int    `json:"category_id"`
+		Title           string `json:"title"`
+		Contents        string `json:"contents"`
+		PreviewContents string `json:"preview_contents"`
+		Password        string `json:"password"`
+		Status          int    `json:"status"`
+	}{}
 
-	if err := c.BodyParser(&data); err != nil {
+	if err := c.BodyParser(&payload); err != nil {
 		return err
 	}
-
-	categorId, err := strconv.Atoi(data["category_id"])
-	if err != nil {
-		panic(err)
-	}
-	status, err := strconv.Atoi(data["status"])
-	if err != nil {
-		panic(err)
-	}
-
 	post := models.Post{
-		CategoryId:      categorId,
-		Title:           data["title"],
-		Contents:        data["contents"],
-		PreviewContents: data["preview_contents"],
-		Password:        data["password"],
-		Status:          status,
+		CategoryId:      payload.CategoryId,
+		Title:           payload.Title,
+		Contents:        payload.Contents,
+		PreviewContents: payload.PreviewContents,
+		Password:        payload.Password,
+		Status:          payload.Status,
 	}
 
 	database.DB.Create(&post)
