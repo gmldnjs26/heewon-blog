@@ -14,7 +14,7 @@ func main() {
 
 	for i := 0; i < 30; i++ {
 		product := models.Post{
-			CategoryId:      int16(rand.Int()),
+			CategoryId:      rand.Int(),
 			Title:           faker.Username(),
 			Contents:        "<h1>ssaced</h1>",
 			PreviewContents: faker.Username(),

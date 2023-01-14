@@ -1,8 +1,8 @@
 package main
 
 import (
-	"heewon-blog/src/controllers"
 	"heewon-blog/src/database"
+	"heewon-blog/src/routes"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -23,12 +23,7 @@ func main() {
 		// httpOnly는 javascript로 쿠키로 접근 못하게끔 하는 설정이다. 프론트에서 쿠키를 취득할 액션을 취할 필요는 없고 자동으로 취득하게 된다.
 		// request를 보낼때 서버에서 쿠키를 받아 브라우저에서 저장중이라면 자동으로 header에 실려서 날라간다.
 	}))
-
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("This is heewon blog")
-	})
-
-	app.Get("/posts", controllers.Posts)
+	routes.Setup(app)
 
 	app.Listen(":5000")
 }
