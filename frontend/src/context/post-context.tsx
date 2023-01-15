@@ -7,15 +7,15 @@ export const PostContext = React.createContext({
   changeSelectedCategory: ({}) => {},
 });
 
-export const PostProvider = (props) => {
+export const PostContextProvider = (props) => {
   const [posts, setPosts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
 
-  const changePostsHandler = (data) => {
+  const handleChangePosts = (data) => {
     setPosts([...data]);
   };
 
-  const changeSelectedCategoryHandler = (data) => {
+  const handleChangeSelectedCategory = (data) => {
     setSelectedCategory({ ...data });
   };
 
@@ -24,8 +24,8 @@ export const PostProvider = (props) => {
       value={{
         posts,
         selectedCategory,
-        changePosts: changePostsHandler,
-        changeSelectedCategory: changeSelectedCategoryHandler,
+        changePosts: handleChangePosts,
+        changeSelectedCategory: handleChangeSelectedCategory,
       }}
     >
       {props.children}

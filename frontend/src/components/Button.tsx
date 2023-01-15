@@ -13,7 +13,11 @@ const SC = {
 };
 
 const CustomButton = (props: ButtonProps) => {
-  return <SC.Button variant="contained">{props.children}</SC.Button>;
+  return (
+    <SC.Button onClick={props.onClick} variant="contained">
+      {props.children}
+    </SC.Button>
+  );
 };
 
 export default CustomButton;

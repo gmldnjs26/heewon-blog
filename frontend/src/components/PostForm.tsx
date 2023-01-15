@@ -3,9 +3,11 @@ import { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
 import MarkDownView from './MarkDownView';
 import Button from './Button';
 import { getLineAndCol } from '../utils/editHelper';
+import { PostInput } from '../types/global';
 
 type Props = {
   className?: string;
+  onSubmit: (inpuData: PostInput) => void;
 };
 
 const SC = {
@@ -48,7 +50,7 @@ const SC = {
   })),
 };
 
-const PostForm: FC<Props> = ({ className }) => {
+const PostForm: FC<Props> = ({ className, onSubmit }) => {
   const [postTitle, setPostTitle] = useState('');
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setPostTitle(e.currentTarget.value);
@@ -81,6 +83,16 @@ const PostForm: FC<Props> = ({ className }) => {
       }
     }
   };
+  const handleClick = () => {
+    onSubmit({
+      categoryId: 1,
+      title: postTitle,
+      contents: postContents,
+      previewContents: postContents,
+      password: '123',
+      status: 1,
+    });
+  };
   return (
     <SC.PostFormContainer>
       <SC.PostFormHeader>
@@ -104,7 +116,7 @@ const PostForm: FC<Props> = ({ className }) => {
         </SC.PostFormSection>
       </SC.PostFormBody>
       <SC.PostFormFooter>
-        <Button>작성하기</Button>
+        <Button onClick={handleClick}>작성하기</Button>
       </SC.PostFormFooter>
     </SC.PostFormContainer>
   );
