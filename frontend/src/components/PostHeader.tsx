@@ -1,10 +1,10 @@
 import { styled } from '@mui/material/styles';
 import { FC } from 'react';
-import { Post } from '../types/global';
+import { PostDetail } from '../types/global';
 
 type Props = {
   className?: string;
-  post: Post;
+  post: PostDetail;
 };
 
 const SC = {

@@ -1,12 +1,12 @@
 import { styled } from '@mui/material/styles';
 import { FC, ReactNode } from 'react';
-import { Post } from '../types/global';
+import { PostDetail } from '../types/global';
 import MarkDownView from './MarkDownView';
 
 type Props = {
   className?: string;
   children?: ReactNode;
-  post: Post;
+  post: PostDetail;
 };
 
 const SC = {

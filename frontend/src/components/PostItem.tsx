@@ -3,11 +3,11 @@ import { boxShadow } from '../utils/styleHelper';
 import ChatIcon from '@mui/icons-material/Chat';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
-import { Post } from '../types/global';
+import { PostDetail } from '../types/global';
 
 type Props = {
   className?: string;
-  post: Post;
+  post: PostDetail;
 };
 
 const SC = {
