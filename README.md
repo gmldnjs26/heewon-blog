@@ -48,3 +48,7 @@ https://www.erdcloud.com/d/g6asDHhkRHc9qbFXr
 | 글 작성                                                                                        | 글 상세                                                                                         |
 | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | ![글 작성](https://github.com/gmldnjs26/react-heewon-blog/blob/develop/img/write.png?raw=true) | ![글 상세](https://github.com/gmldnjs26/react-heewon-blog/blob/develop/img/detail.png?raw=true) |
+
+| 글 작성 2                                                                                       | 글 임시저장                                                                                       |
+| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| ![글 작성](https://github.com/gmldnjs26/react-heewon-blog/blob/develop/img/write2.png?raw=true) | ![글 상세](https://github.com/gmldnjs26/react-heewon-blog/blob/develop/img/임시저장.png?raw=true) |
