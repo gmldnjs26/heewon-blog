@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { PostInput } from '../types/global';
+import axios, { AxiosResponse } from 'axios';
+import { PostDetail, PostInput } from '../types/global';
 
 const $axios = axios.create({
   baseURL: 'http://localhost:5000',
@@ -21,12 +21,10 @@ export const createPost = async (inputData: PostInput) => {
     console.log(err);
   }
 };
-export const fetchPostDetail = async (postId: string) => {
+export const fetchPostDetail = async (postId: string): Promise<PostDetail> => {
   try {
-    const result = await $axios.get(`/posts/${postId}`);
-    return {
-      result,
-    };
+    const { data } = await $axios.get(`/posts/${postId}`);
+    return data;
   } catch (err) {
     console.log(err);
   }

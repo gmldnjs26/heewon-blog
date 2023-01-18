@@ -1,12 +1,13 @@
 import { FC, useEffect, useMemo, useState } from 'react';
 import { styled } from '@mui/material/styles';
-import PostHeader from '../../components/PostHeader';
-import PostBody from '../../components/PostBody';
-import PostNavigation from '../../components/PostNavigation';
-import { PostDetail } from '../../types/global';
-import { postList } from '../../utils/dummy';
+import PostHeader from '@/components/PostHeader';
+import PostBody from '@/components/PostBody';
+import PostNavigation from '@/components/PostNavigation';
+import { PostDetail } from '@/types/global';
+import { postList } from '@/utils/dummy';
+import { fetchPostDetail } from '@/api';
 
-import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 type Props = {
   className?: string;
@@ -31,7 +32,7 @@ const SC = {
 const Post: FC<Props> = ({ post }) => {
   const [activeId, setActiveId] = useState('');
   const navInfo = useMemo(() => {
-    return postList[0].contents
+    return post.contents
       .split('\n')
       .filter((item) => {
         // temp[0]가 #이 되면 markdown 규칙에서 h1이 되는것
@@ -91,8 +92,8 @@ const Post: FC<Props> = ({ post }) => {
   return (
     <SC.Post>
       <SC.Main>
-        <PostHeader post={postList[0]} />
-        <PostBody post={postList[0]} />
+        <PostHeader post={post} />
+        <PostBody post={post} />
       </SC.Main>
       <SC.PostNavigation navInfo={navInfo} activeNavId={activeId} />
     </SC.Post>
@@ -103,22 +104,10 @@ export default Post;
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-
-  // const result = await fetch('http://localhost:5000/posts', {
-  //   method: 'get',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  // });
-  // const data = await result.json();
-  // console.log(data);
-
-  // // fetch data and can use req.params or etc..
-  // const post = postList.find((post) => post.id === Number(id));
-
+  const post = await fetchPostDetail(id);
   return {
     props: {
-      post: [],
+      post,
     },
   };
 }
