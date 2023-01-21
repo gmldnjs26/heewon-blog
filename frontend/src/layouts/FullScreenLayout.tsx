@@ -1,7 +1,9 @@
 import { styled } from '@mui/material/styles';
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useContext } from 'react';
 
 import Header from '../components/Header';
+import LoadingOverlay from '~/components/LoadingOverlay';
+import { UIContext } from '~/context/ui-contenxt';
 
 type LayoutProps = Required<{
   readonly children: ReactElement;
@@ -27,8 +29,10 @@ const SC = {
 };
 
 const DefaultLayout: FC<LayoutProps> = ({ children }) => {
+  const uiContext = useContext(UIContext);
   return (
     <SC.App>
+      {uiContext.pageLoading && <LoadingOverlay />}
       <Header />
       <SC.Container>
         <SC.Main>
