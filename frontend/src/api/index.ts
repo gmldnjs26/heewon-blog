@@ -6,9 +6,9 @@ const $axios = axios.create({
   withCredentials: true,
 });
 
-export const createPost = async (inputData: PostInput) => {
+export const createPost = async (inputData: PostInput): Promise<PostDetail> => {
   try {
-    const result = await $axios.post('/posts', {
+    const { data } = await $axios.post('/posts', {
       category_id: inputData.categoryId,
       title: inputData.title,
       contents: inputData.contents,
@@ -16,7 +16,7 @@ export const createPost = async (inputData: PostInput) => {
       password: inputData.password,
       status: inputData.status,
     });
-    console.log(result);
+    return data;
   } catch (err) {
     console.log(err);
   }
@@ -29,16 +29,10 @@ export const fetchPostDetail = async (postId: string): Promise<PostDetail> => {
     console.log(err);
   }
 };
-export const fetchPostList = async (inputData: Object) => {
+export const fetchPostList = async (): Promise<PostDetail[]> => {
   try {
-    await $axios.post('/posts', {
-      category_id: '2',
-      title: 'title',
-      contents: 'contents',
-      preview_contents: 'contents2',
-      password: '123',
-      status: '1',
-    });
+    const { data } = await $axios.get('/posts');
+    return data;
   } catch (err) {
     console.log(err);
   }

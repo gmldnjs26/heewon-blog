@@ -1,7 +1,13 @@
 import { styled } from '@mui/material/styles';
+import { FC, ReactNode } from 'react';
+import { PostDetail } from '~/types/global';
 import PostItem from './PostItem';
 
-import { postList } from '../utils/dummy';
+type Props = {
+  className?: string;
+  children?: ReactNode;
+  postList: PostDetail[];
+};
 
 const SC = {
   PostList: styled('ul')(({ theme }) => ({
@@ -11,7 +17,7 @@ const SC = {
   })),
 };
 
-const PostList = () => {
+const PostList: FC<Props> = ({ postList }) => {
   return (
     <SC.PostList>
       {postList.map((post) => (

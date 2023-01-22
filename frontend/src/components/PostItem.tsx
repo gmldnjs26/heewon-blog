@@ -79,7 +79,7 @@ const PostItem: FC<Props> = ({ className, post }) => {
           <span>{post.createdAt}</span>
           <SC.PostCommentInfoWrapper>
             <SC.PostCommentIcon />
-            {post.comments.length}
+            {post.comments?.length || 0}
           </SC.PostCommentInfoWrapper>
         </SC.PostMetaInfo>
       </SC.PostMainWrapper>

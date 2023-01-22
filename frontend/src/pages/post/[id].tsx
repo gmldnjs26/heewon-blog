@@ -4,7 +4,6 @@ import PostHeader from '@/components/PostHeader';
 import PostBody from '@/components/PostBody';
 import PostNavigation from '@/components/PostNavigation';
 import { PostDetail } from '@/types/global';
-import { postList } from '@/utils/dummy';
 import { fetchPostDetail } from '@/api';
 
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';

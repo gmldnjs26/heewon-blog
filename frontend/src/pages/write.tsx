@@ -3,11 +3,13 @@ import type { NextPageWithLayout } from 'next';
 import FullScreenLayout from '../layouts/FullScreenLayout';
 import { createPost } from '../api';
 import { PostInput } from '../types/global';
+import { useRouter } from 'next/router';
 
 const Write: NextPageWithLayout = () => {
+  const router = useRouter();
   const handleSubmit = async (inputData: PostInput) => {
     const result = await createPost(inputData);
-    console.log(result);
+    router.push(`/post/${result.id}`);
   };
   return <PostForm onSubmit={handleSubmit} />;
 };
