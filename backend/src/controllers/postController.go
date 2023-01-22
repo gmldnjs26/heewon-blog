@@ -21,7 +21,7 @@ func GetPost(c *fiber.Ctx) error {
 	return c.JSON(post)
 }
 
-func Posts(c *fiber.Ctx) error {
+func GetPosts(c *fiber.Ctx) error {
 	var posts []models.Post
 	database.DB.Find(&posts)
 	return c.JSON(posts)
