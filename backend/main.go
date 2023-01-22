@@ -16,6 +16,7 @@ func main() {
 	app := fiber.New()
 
 	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "*",
 		AllowCredentials: true,
 		// TODO: 좀더 조사
 		// cookie의 정보를 허용된 origin에서는 취득할 수 있게끔 설정? 응답헤더에 담아서 보내는건데 프론트에서 이 쿠키를 취득할 수 있게끔 한다?

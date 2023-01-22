@@ -19,7 +19,7 @@ export async function getServerSideProps() {
   const postList = await fetchPostList();
   return {
     props: {
-      postList,
+      postList: postList || [],
     },
   };
 }

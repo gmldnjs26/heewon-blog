@@ -14,10 +14,10 @@ type AppProps<P = any> = {
   emotionCache?: EmotionCache;
 } & Omit<AppPropsWithLayout<P>, 'pageProps'>;
 
-import 'src/styles/reset.scss';
-import 'src/styles/common.scss';
-import DefaultLayout from '../layouts/DefaultLayout';
-import { PostContextProvider } from '../context/post-context';
+import '~/styles/reset.scss';
+import '~/styles/common.scss';
+import DefaultLayout from '~/layouts/DefaultLayout';
+import { PostContextProvider } from '~/context/post-context';
 import { UIContextProvider } from '~/context/ui-contenxt';
 
 const App = ({ Component, pageProps, emotionCache = clientSideEmotionCache }: AppProps<any>) => {

@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { PostDetail, PostInput } from '../types/global';
 
 const $axios = axios.create({
+  // FIXME: 배포할때 baseURL 수정하자
   baseURL: 'http://localhost:5000',
   withCredentials: true,
 });

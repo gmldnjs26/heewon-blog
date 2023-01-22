@@ -106,7 +106,7 @@ export async function getServerSideProps(context) {
   const post = await fetchPostDetail(id);
   return {
     props: {
-      post,
+      post: post || {},
     },
   };
 }
