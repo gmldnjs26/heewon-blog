@@ -3,11 +3,10 @@ import { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
 import MarkDownView from './MarkDownView';
 import Button from './Button';
 import { getLineAndCol } from '../utils/editHelper';
-import { PostInput } from '../types/global';
 
 type Props = {
   className?: string;
-  onSubmit: (inpuData: PostInput) => void;
+  onClick: (inpuData: { title: string; contents: string }) => void;
 };
 
 const SC = {
@@ -50,7 +49,7 @@ const SC = {
   })),
 };
 
-const PostForm: FC<Props> = ({ className, onSubmit }) => {
+const PostForm: FC<Props> = ({ className, onClick }) => {
   const [postTitle, setPostTitle] = useState('');
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setPostTitle(e.currentTarget.value);
@@ -84,13 +83,9 @@ const PostForm: FC<Props> = ({ className, onSubmit }) => {
     }
   };
   const handleClick = () => {
-    onSubmit({
-      categoryId: 1,
+    onClick({
       title: postTitle,
       contents: postContents,
-      previewContents: postContents,
-      password: '123',
-      status: 1,
     });
   };
   return (

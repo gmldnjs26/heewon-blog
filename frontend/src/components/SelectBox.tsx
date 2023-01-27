@@ -25,7 +25,7 @@ const SelectBox: FC<Props> = ({ selectedValue, setSelectedValue, items, label, s
       <InputLabel id="demo-simple-select-label">{label}</InputLabel>
       <Select value={selectedValue} label={label} onChange={handleChange}>
         <MenuItem value="">
-          <em>None</em>
+          <em>선택안함</em>
         </MenuItem>
         {items.map((item) => {
           return (
