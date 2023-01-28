@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -8,21 +7,29 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 type Props = {
   className?: string;
   children?: ReactNode;
+  sx?: {};
+  label: string;
+  size?: 'small' | 'medium';
   items: { key: string | number; value: string }[];
   selectedValue: string | number;
-  label: string;
   setSelectedValue: (value: string) => void;
-  sx?: {};
 };
 
-const SelectBox: FC<Props> = ({ selectedValue, setSelectedValue, items, label, sx }) => {
+const SelectBox: FC<Props> = ({
+  sx,
+  label,
+  size = 'medium',
+  items,
+  selectedValue,
+  setSelectedValue,
+}) => {
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedValue(event.target.value);
   };
 
   return (
-    <FormControl sx={sx} fullWidth>
-      <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+    <FormControl sx={sx} size={size}>
+      <InputLabel>{label}</InputLabel>
       <Select value={selectedValue} label={label} onChange={handleChange}>
         <MenuItem value="">
           <em>선택안함</em>

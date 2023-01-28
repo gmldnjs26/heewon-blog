@@ -9,6 +9,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { PostInput } from '~/types/global';
 import SelectBox from './SelectBox';
+import RadioGroup from './RadioGroup';
+
+import { postStatusList } from '~/utils/const';
 
 type Props = {
   className?: string;
@@ -24,9 +27,6 @@ const SC = {
     minWidth: '500px',
   })),
   PostFormDialogContent: styled(DialogContent)(({ theme }) => ({})),
-  PostFormSelectBox: styled(SelectBox)(({ theme }) => ({
-    width: '120px',
-  })),
 };
 
 const PostFormDialog: FC<Props> = ({ open, onClose, onSubmit }) => {
@@ -37,11 +37,11 @@ const PostFormDialog: FC<Props> = ({ open, onClose, onSubmit }) => {
   const handleClose = () => {
     onClose();
   };
-
+  // FIXME: 카테고리 API로
   const items = [
     {
       key: 1,
-      value: 'aaa',
+      value: 'aaaaaaaaaaaaaaaaaaaaa',
     },
     {
       key: 2,
@@ -53,13 +53,23 @@ const PostFormDialog: FC<Props> = ({ open, onClose, onSubmit }) => {
     },
   ];
   const [categoryId, setCategoryId] = useState<string | number>();
+  const [postStatus, setPostStatus] = useState<number>(0); // 0: 공개 1: 보호 2: 비공개
+  const [previewContents, setPreviewContents] = useState<string>();
 
   return (
     <SC.PostFormDialog open={open} onClose={handleClose} maxWidth={false}>
       <SC.PostFormDialogTitle>글 작성완료하기</SC.PostFormDialogTitle>
       <SC.PostFormDialogContent>
+        <RadioGroup
+          sx={{ display: 'block', marginBottom: '16px' }}
+          items={postStatusList}
+          selectedValue={postStatus}
+          setSelectedValue={setPostStatus}
+          row={true}
+        />
         <SelectBox
-          sx={{ width: '120px', height: '60px', marginTop: '8px' }}
+          sx={{ width: '120px', marginBottom: '24px' }}
+          size="small"
           items={items}
           label="카테고리"
           selectedValue={categoryId}
@@ -69,8 +79,10 @@ const PostFormDialog: FC<Props> = ({ open, onClose, onSubmit }) => {
           autoFocus
           margin="dense"
           label="미리보기 내용"
-          type="email"
+          type="text"
           fullWidth
+          value={previewContents}
+          onChange={(e) => setPreviewContents(e.target.value)}
           multiline
           rows={5}
         />
