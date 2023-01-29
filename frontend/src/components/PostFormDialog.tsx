@@ -7,7 +7,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { PostInput } from '~/types/global';
+import { PostInput, PostInputStep2 } from '~/types/global';
 import SelectBox from './SelectBox';
 import RadioGroup from './RadioGroup';
 
@@ -16,8 +16,9 @@ import { postStatusList } from '~/utils/const';
 type Props = {
   className?: string;
   children?: ReactNode;
+  postInput: PostInput
   open: boolean;
-  onSubmit: (inputData: PostInput) => void;
+  onSubmit: (inputData: PostInputStep2) => void;
   onClose: () => void;
 };
 
@@ -30,8 +31,17 @@ const SC = {
 };
 
 const PostFormDialog: FC<Props> = ({ open, onClose, onSubmit }) => {
+  const [categoryId, setCategoryId] = useState<number>(0);
+  const [postStatus, setPostStatus] = useState<number>(0); // 0: 공개 1: 보호 2: 비공개
+  const [previewContents, setPreviewContents] = useState<string>();
+
   const handleSubmit = () => {
-    onSubmit(undefined);
+    onSubmit({
+      categoryId,
+      previewContents,
+      password: '',
+      status: postStatus,
+    });
   };
 
   const handleClose = () => {
@@ -52,9 +62,6 @@ const PostFormDialog: FC<Props> = ({ open, onClose, onSubmit }) => {
       value: 'ccc',
     },
   ];
-  const [categoryId, setCategoryId] = useState<string | number>();
-  const [postStatus, setPostStatus] = useState<number>(0); // 0: 공개 1: 보호 2: 비공개
-  const [previewContents, setPreviewContents] = useState<string>();
 
   return (
     <SC.PostFormDialog open={open} onClose={handleClose} maxWidth={false}>

@@ -3,10 +3,11 @@ import { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
 import MarkDownView from './MarkDownView';
 import Button from './Button';
 import { getLineAndCol } from '../utils/editHelper';
+import { PostInput, PostInputStep1 } from '~/types/global';
 
 type Props = {
   className?: string;
-  onClick: (inpuData: { title: string; contents: string }) => void;
+  onClick: (inpuData: PostInputStep1) => void;
 };
 
 const SC = {
@@ -86,6 +87,7 @@ const PostForm: FC<Props> = ({ className, onClick }) => {
     onClick({
       title: postTitle,
       contents: postContents,
+      previewContents: ''
     });
   };
   return (

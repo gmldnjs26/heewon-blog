@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { Dispatch, FC, ReactNode, SetStateAction } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -8,11 +8,12 @@ type Props = {
   className?: string;
   children?: ReactNode;
   sx?: {};
-  label: string;
   size?: 'small' | 'medium';
   items: { key: string | number; value: string }[];
+  label: string;
   selectedValue: string | number;
-  setSelectedValue: (value: string) => void;
+  // FIXME: 일반 set함수도 올 수 있게끔 타입정의를 해보고 싶은데..
+  setSelectedValue: Dispatch<SetStateAction<string | number>>;
 };
 
 const SelectBox: FC<Props> = ({
