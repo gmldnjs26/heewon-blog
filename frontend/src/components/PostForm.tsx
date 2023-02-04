@@ -67,12 +67,18 @@ const PostForm: FC<Props> = ({ className, onClick }) => {
       const curPos = currentTarget.selectionStart;
       const lineInfo = getLineAndCol(text, curPos);
 
+      const emptyCurrentLine = () => {
+        const newValue = currentTarget.value.substring(0, curPos - lineInfo.curLine.length);
+        setPostContents(newValue);
+      };
+
       // "- "을 체크
       const isSymbol = lineInfo.curLine.match(/^(\s*?)\- /);
 
       if (isSymbol) {
         // "- " 뒤로 아무 문자도 없으면 심볼추가안함
         if (/^(\s*?)\- $/.test(lineInfo.curLine)) {
+          emptyCurrentLine();
           return;
         }
         setTimeout(() => {
@@ -87,7 +93,7 @@ const PostForm: FC<Props> = ({ className, onClick }) => {
     onClick({
       title: postTitle,
       contents: postContents,
-      previewContents: ''
+      previewContents: '',
     });
   };
   return (

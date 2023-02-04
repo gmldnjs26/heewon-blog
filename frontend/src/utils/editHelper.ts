@@ -1,6 +1,6 @@
 export const getLineAndCol = (text: string, pos: number) => {
   const lines = text.split('\n');
-  const beforeLines = text.substr(0, pos).split('\n');
+  const beforeLines = text.substring(0, pos).split('\n');
   const line = beforeLines.length;
   const col = beforeLines[beforeLines.length - 1].length;
 
@@ -11,8 +11,8 @@ export const getLineAndCol = (text: string, pos: number) => {
   return {
     line,
     col,
-    beforeText: text.substr(0, pos),
-    afterText: text.substr(pos),
+    beforeText: text.substring(0, pos),
+    afterText: text.substring(pos),
     curLine,
     prevLine,
     nextLine,

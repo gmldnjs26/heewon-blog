@@ -12,7 +12,7 @@ type Props = {
 };
 
 const SC = {
-  MarkDown: styled('div')(({ theme }) => ({})),
+  MarkDown: styled(ReactMarkdown)(({ theme }) => ({})),
   H1: styled('h1')(({ theme }) => ({
     fontSize: '32px',
     borderBottom: '1px solid #ddd',
@@ -64,11 +64,14 @@ const SC = {
   Td: styled('td')(({ theme }) => ({
     border: '1px solid black',
   })),
+  P: styled('p')(({ theme }) => ({
+    whiteSpace: 'pre-wrap',
+  })),
 };
 
 const MarkDownView: FC<Props> = React.memo(function MarkdownView({ className, markdown }) {
   return (
-    <ReactMarkdown
+    <SC.MarkDown
       className={className}
       remarkPlugins={[remarkGfm]}
       components={{
@@ -108,6 +111,9 @@ const MarkDownView: FC<Props> = React.memo(function MarkdownView({ className, ma
         td({ className, children, ...props }) {
           return <SC.Td className={className}>{children}</SC.Td>;
         },
+        p({ className, children, ...props }) {
+          return <SC.P className={className}>{children}</SC.P>;
+        },
         strong({ className, children, ...props }) {
           return <SC.Strong className={className}>{children}</SC.Strong>;
         },
@@ -126,7 +132,7 @@ const MarkDownView: FC<Props> = React.memo(function MarkdownView({ className, ma
       }}
     >
       {markdown}
-    </ReactMarkdown>
+    </SC.MarkDown>
   );
 });
 
