@@ -23,7 +23,12 @@ func GetPost(c *fiber.Ctx) error {
 
 func GetPosts(c *fiber.Ctx) error {
 	var posts []models.Post
-	database.DB.Find(&posts)
+	conditions := make(map[string]interface{})
+	categoryId := c.Query("category", "")
+	if categoryId != "" {
+		conditions["categoryId"] = categoryId
+	}
+	database.DB.Where(conditions).Find(&posts)
 	return c.JSON(posts)
 }
 
