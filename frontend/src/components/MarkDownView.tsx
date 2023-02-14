@@ -66,6 +66,7 @@ const SC = {
   })),
   P: styled('p')(({ theme }) => ({
     whiteSpace: 'pre-wrap',
+    margin: '8px 0',
   })),
 };
 

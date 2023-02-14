@@ -19,13 +19,16 @@ const SC = {
     background: '#f5f6f6',
     minHeight: '100vh',
   })),
+  Header: styled(Header)(({ theme }) => ({})),
   Container: styled('div')(({ theme }) => ({
     display: 'flex',
   })),
   Main: styled('div')(({ theme }) => ({
     flex: '1',
     padding: '40px 0',
-    minHeight: 'calc(100vh - 64px)',
+    margin: '0 48px',
+    height: 'calc(100vh - 64px)',
+    overflow: 'auto',
   })),
   MainWrapper: styled('div')(({ theme }) => ({
     maxWidth: '1000px',
@@ -63,7 +66,7 @@ const DefaultLayout: FC<LayoutProps> = ({ children }) => {
   return (
     <SC.App>
       {uiContext.pageLoading && <LoadingOverlay />}
-      <Header />
+      <SC.Header />
       <SC.Container>
         <SC.Sidebar />
         <SC.Main>
