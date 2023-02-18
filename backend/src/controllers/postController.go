@@ -24,11 +24,15 @@ func GetPost(c *fiber.Ctx) error {
 func GetPosts(c *fiber.Ctx) error {
 	var posts []models.Post
 	conditions := make(map[string]interface{})
-	categoryId := c.Query("category", "")
-	if categoryId != "" {
-		conditions["categoryId"] = categoryId
+	var joins string
+	categoryName := c.Query("category_name", "")
+	if categoryName != "" {
+		// FIXME: ORM의 기능을 이용하고 싶은데 일단 나마쿼리로..
+		joins = "left join categories on posts.category_id = categories.id"
+		conditions["categories.name"] = categoryName
 	}
-	database.DB.Where(conditions).Find(&posts)
+	database.DB.Joins(joins).Where(conditions).Find(&posts)
+	// database.DB.Table("post").Select("*").Joins("left join post on post.category_id = category.id").Where(conditions)
 	return c.JSON(posts)
 }
 

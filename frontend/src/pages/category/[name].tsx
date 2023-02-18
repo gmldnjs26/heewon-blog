@@ -15,8 +15,8 @@ const Home: FC<Props> = ({ postList }) => {
 
 export default Home;
 
-export async function getServerSideProps() {
-  const postList = await fetchPostList();
+export async function getServerSideProps(ctx) {
+  const postList = await fetchPostList({ category_name: ctx.params.name });
   return {
     props: {
       postList: postList || [],

@@ -30,9 +30,9 @@ export const fetchPostDetail = async (postId: string): Promise<PostDetail> => {
     console.log(err);
   }
 };
-export const fetchPostList = async (): Promise<PostDetail[]> => {
+export const fetchPostList = async (params = {}): Promise<PostDetail[]> => {
   try {
-    const { data } = await $axios.get('/posts');
+    const { data } = await $axios.get('/posts', { params });
     return data;
   } catch (err) {
     console.log(err);
