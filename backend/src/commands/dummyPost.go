@@ -9,7 +9,7 @@ import (
 	"github.com/bxcodec/faker/v3"
 )
 
-func main() {
+func main2() {
 	database.Connect()
 
 	for i := 0; i < 30; i++ {
