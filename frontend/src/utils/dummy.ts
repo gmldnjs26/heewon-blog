@@ -169,7 +169,7 @@ export const categories: Category[] = [
     name: 'Vue',
     children: [
       {
-        id: 11,
+        id: 5,
         parentId: 1,
         name: 'Composition',
       },
@@ -181,17 +181,17 @@ export const categories: Category[] = [
     name: 'React',
     children: [
       {
-        id: 21,
+        id: 6,
         parentId: 2,
         name: 'Redux',
       },
       {
-        id: 22,
+        id: 7,
         parentId: 2,
         name: 'ContextAPI',
       },
       {
-        id: 23,
+        id: 8,
         parentId: 2,
         name: 'Mox',
       },
