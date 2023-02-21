@@ -22,6 +22,7 @@ http://35.75.138.20
   - [기억 보다 기록을](https://kyounghwan01.github.io/blog)
   - [평범한 직장인의 공부 정리](https://developer-talk.tistory.com/)
 - 실제 책갈피와 같이 인덱스 기능을 넣어서 인덱스 링크 리스트를 보존 관리해서 정보를 찾는데 좀더 간단하게 찾을 수 있는? 기능도 있으면 좋겠다.
+- 좀더 의미있는 URL을 위해 category/categoryname 으로 페이지가 이루어질 수 있게 하자
 
 ## 기술
 

@@ -12,4 +12,6 @@ func Setup(app *fiber.App) {
 	app.Post("/posts", controllers.CreatePost)
 	app.Get("/posts/:id", controllers.GetPost)
 	app.Put("/posts/:id", controllers.UpdatePost)
+
+	app.Get("/categories", controllers.GetCategories)
 }
