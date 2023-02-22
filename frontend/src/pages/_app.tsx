@@ -17,8 +17,9 @@ type AppProps<P = any> = {
 import '~/styles/reset.scss';
 import '~/styles/common.scss';
 import DefaultLayout from '~/layouts/DefaultLayout';
-import { PostContextProvider } from '~/context/post-context';
 import { UIContextProvider } from '~/context/ui-contenxt';
+import { CategoryContextProvider } from '~/context/category-context';
+import { PostContextProvider } from '~/context/post-context';
 
 const App = ({ Component, pageProps, emotionCache = clientSideEmotionCache }: AppProps<any>) => {
   const getLayout = Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>);
@@ -31,7 +32,9 @@ const App = ({ Component, pageProps, emotionCache = clientSideEmotionCache }: Ap
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <UIContextProvider>
-          <PostContextProvider>{getLayout(<Component {...pageProps} />)}</PostContextProvider>
+          <CategoryContextProvider>
+            <PostContextProvider>{getLayout(<Component {...pageProps} />)}</PostContextProvider>
+          </CategoryContextProvider>
         </UIContextProvider>
       </ThemeProvider>
     </CacheProvider>

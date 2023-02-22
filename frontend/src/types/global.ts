@@ -1,3 +1,10 @@
+export interface Category {
+  id: number;
+  parentId: number; // 0는 자기가 제일 상위 카테고리일때
+  name: string;
+  children?: Category[];
+}
+
 export interface PostDetail {
   id: number;
   title: string;
@@ -17,7 +24,7 @@ export interface PostInputStep1 {
   previewContents: string;
 }
 export interface PostInputStep2 {
-  categoryId: number
+  categoryId: number;
   previewContents: string;
   password: string;
   status: number;
