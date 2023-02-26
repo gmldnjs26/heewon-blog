@@ -31,7 +31,7 @@ func GetPosts(c *fiber.Ctx) error {
 		joins = "left join categories on posts.category_id = categories.id"
 		conditions["categories.name"] = categoryName
 	}
-	database.DB.Joins(joins).Where(conditions).Find(&posts)
+	database.DB.Joins(joins).Where(conditions).Limit(20).Find(&posts)
 	// database.DB.Table("post").Select("*").Joins("left join post on post.category_id = category.id").Where(conditions)
 	return c.JSON(posts)
 }

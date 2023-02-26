@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 import { categories } from '../utils/dummy';
 import Accordion from './Accordion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Category } from '@/types/global';
 
 type Props = {
   className?: string;
@@ -14,7 +15,7 @@ const SC = {
     padding: '24px 8px',
     color: theme.palette.primary['800'],
     fontWeight: '400',
-    fontSize: '14px',
+    fontSize: '16px',
   })),
   SidebarLinkList: styled('ul')(({ theme }) => ({})),
   SidebarLinkItem: styled('li')(({ theme }) => ({
@@ -25,9 +26,9 @@ const SC = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingLeft: '8px',
+    padding: '8px 0 8px 8px',
+    lineHeight: '1',
     borderRadius: '3px',
-    height: '24px',
     '&:hover': {
       color: theme.palette.primary['900'],
       background: theme.palette.primary['200'],
@@ -39,11 +40,13 @@ const SC = {
     },
   })),
   SidebarLinkItemBody: styled('ul')(({ theme }) => ({
-    paddingTop: '8px',
+    paddingTop: '4px',
   })),
   SidebarLinkItemBodyItem: styled('li')(({ theme }) => ({
+    fontSize: '14px',
     transition: 'all 0.25s ease-in-out',
-    padding: '2px 0 2px 16px',
+    padding: '8px 0 8px 16px',
+    lineHeight: '1',
     borderRadius: '3px',
     cursor: 'pointer',
     '&.active': {
@@ -63,12 +66,6 @@ const SC = {
       transform: 'rotate(180deg)',
     },
   })),
-};
-type Category = {
-  id: number;
-  parentId: number; // 0는 자기가 제일 상위 카테고리일때
-  name: string;
-  children?: Category[];
 };
 
 const Sidebar: FC<Props> = ({ className }) => {
