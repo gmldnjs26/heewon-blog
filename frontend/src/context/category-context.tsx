@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export const CategoryContext = React.createContext({
   categories: [],
   selectedCategory: {},
-  chnageCategories: ([]) => {},
+  changeCategories: ([]) => {},
   changeSelectedCategory: ({}) => {},
 });
 
@@ -24,7 +24,7 @@ export const CategoryContextProvider = (props) => {
       value={{
         categories,
         selectedCategory,
-        chnageCategories: handleChangeCategories,
+        changeCategories: handleChangeCategories,
         changeSelectedCategory: handleChangeSelectedCategory,
       }}
     >

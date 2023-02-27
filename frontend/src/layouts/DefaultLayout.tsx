@@ -58,7 +58,6 @@ const SC = {
 const DefaultLayout: FC<LayoutProps> = ({ children }) => {
   const uiContext = useContext(UIContext);
   Router.events.on('routeChangeStart', (url) => {
-    console.log(url);
     uiContext.changePageLoading(true);
   });
   Router.events.on('routeChangeComplete', () => uiContext.changePageLoading(false));
