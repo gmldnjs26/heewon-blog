@@ -1,10 +1,12 @@
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
-import { FC, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { categories } from '../utils/dummy';
 import Accordion from './Accordion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Category } from '@/types/global';
+import { CategoryContext } from '~/context/category-context';
+import { fetchCategoryList } from '~/api';
 
 type Props = {
   className?: string;
@@ -69,6 +71,17 @@ const SC = {
 };
 
 const Sidebar: FC<Props> = ({ className }) => {
+  const categoryContext = useContext(CategoryContext);
+  useEffect(() => {
+    const fetchInit = async () => {
+      const categoryList = await fetchCategoryList();
+      categoryContext.changeCategories(categoryList);
+    };
+    fetchInit();
+    // TODO: categoryContext를 넣으면 무한 로딩이 된다. 그걸 해결하지 않으면 안되는데 ㅠ
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const [openIdList, setOpenIdList] = useState<number[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category>({
     id: undefined,
@@ -94,7 +107,7 @@ const Sidebar: FC<Props> = ({ className }) => {
   return (
     <SC.Sidebar className={className}>
       <SC.SidebarLinkList>
-        {categories.map((category) => (
+        {categoryContext.categories.map((category) => (
           <SC.SidebarLinkItem key={category.id}>
             <SC.SidebarLinkItemTop
               className={category.id === selectedCategory.id ? 'active' : ''}

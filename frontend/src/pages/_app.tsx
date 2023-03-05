@@ -28,15 +28,17 @@ const App = ({ Component, pageProps, emotionCache = clientSideEmotionCache }: Ap
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <UIContextProvider>
-          <CategoryContextProvider>
-            <PostContextProvider>{getLayout(<Component {...pageProps} />)}</PostContextProvider>
-          </CategoryContextProvider>
-        </UIContextProvider>
-      </ThemeProvider>
+      <UIContextProvider>
+        <CategoryContextProvider>
+          <PostContextProvider>
+            <ThemeProvider theme={theme}>
+              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+              <CssBaseline />
+              {getLayout(<Component {...pageProps} />)}
+            </ThemeProvider>
+          </PostContextProvider>
+        </CategoryContextProvider>
+      </UIContextProvider>
     </CacheProvider>
   );
 };
