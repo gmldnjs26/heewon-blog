@@ -40,6 +40,10 @@ https://drive.google.com/file/d/1W5-BhfUbjhmsByyS4zp85V20y9neYsT8/view?usp=shari
 
 https://www.erdcloud.com/d/g6asDHhkRHc9qbFXr
 
+## develop rule
+
+- response는 camelCase로 반환한다.
+
 ## 기타사항
 
 - 카테고리는 무한확장 가능하게 depth와 상위카테고리를 가지게 한다.

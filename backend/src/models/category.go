@@ -4,9 +4,9 @@ type Category struct {
 	Model
 	Name      string `json:"name"`
 	Depth     int    `json:"depth"`
-	ParentId  int    `json:"parent_id"`
-	PostCount int    `json:"post_count"`
+	ParentId  int    `json:"parentId"`
+	PostCount int    `json:"postCount"`
 	Priority  int    `json:"priority"`
-	CreateAt  string `json:"create_at"`
-	UpdateAt  string `json:"update_at"`
+	CreateAt  string `json:"createAt"`
+	UpdateAt  string `json:"updateAt"`
 }

@@ -2,7 +2,7 @@ package models
 
 type File struct {
 	Model
-	PostId   int    `json:"post_id"`
+	PostId   int    `json:"postId"`
 	Url      string `json:"url"`
-	FileType string `json:"file_type"`
+	FileType string `json:"fileType"`
 }
