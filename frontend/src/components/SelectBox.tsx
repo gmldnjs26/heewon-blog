@@ -25,14 +25,14 @@ const SelectBox: FC<Props> = ({
   setSelectedValue,
 }) => {
   const handleChange = (event: SelectChangeEvent) => {
-    setSelectedValue(event.target.value);
+    setSelectedValue(Number(event.target.value));
   };
 
   return (
     <FormControl sx={sx} size={size}>
       <InputLabel>{label}</InputLabel>
-      <Select value={selectedValue} label={label} onChange={handleChange}>
-        <MenuItem value="">
+      <Select defaultValue="0" value={selectedValue} label={label} onChange={handleChange}>
+        <MenuItem value="0">
           <em>선택안함</em>
         </MenuItem>
         {items.map((item) => {

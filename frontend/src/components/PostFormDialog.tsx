@@ -1,13 +1,13 @@
 // 카테고리 설정, 글 미리보기 글 썸네일, 비공개 공개 등등을 입력받는 모달
 import { styled } from '@mui/material/styles';
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { PostInput, PostInputStep2 } from '~/types/global';
+import { Category, PostInput } from '~/types/global';
 import SelectBox from './SelectBox';
 import RadioGroup from './RadioGroup';
 
@@ -16,10 +16,12 @@ import { postStatusList } from '~/utils/const';
 type Props = {
   className?: string;
   children?: ReactNode;
-  postInput: PostInput
+  postInput: PostInput;
+  categories: Category[];
   open: boolean;
-  onSubmit: (inputData: PostInputStep2) => void;
+  onSubmit: () => void;
   onClose: () => void;
+  onChange: (key: string, value: string | number) => void;
 };
 
 const SC = {
@@ -30,38 +32,67 @@ const SC = {
   PostFormDialogContent: styled(DialogContent)(({ theme }) => ({})),
 };
 
-const PostFormDialog: FC<Props> = ({ open, onClose, onSubmit }) => {
-  const [categoryId, setCategoryId] = useState<number>(0);
-  const [postStatus, setPostStatus] = useState<number>(0); // 0: 공개 1: 보호 2: 비공개
-  const [previewContents, setPreviewContents] = useState<string>();
+const PostFormDialog: FC<Props> = ({
+  open,
+  categories,
+  postInput,
+  onClose,
+  onSubmit,
+  onChange,
+}) => {
+  const handleChange = (key: string, value: number | string) => {
+    onChange(key, value);
+  };
 
   const handleSubmit = () => {
-    onSubmit({
-      categoryId,
-      previewContents,
-      password: '',
-      status: postStatus,
-    });
+    onSubmit();
   };
 
   const handleClose = () => {
     onClose();
   };
-  // FIXME: 카테고리 API로
-  const items = [
-    {
-      key: 1,
-      value: 'aaaaaaaaaaaaaaaaaaaaa',
-    },
-    {
-      key: 2,
-      value: 'bbb',
-    },
-    {
-      key: 3,
-      value: 'ccc',
-    },
-  ];
+  // CHATGPT:
+  // const items = categories.reduce((acc, category) => {
+  //   const recursion = (parentName, parent) => {
+  //     if (parent.children.length > 0) {
+  //       parent.children.forEach((children) => {
+  //         const childrenName = `${parentName}_${children.name}`;
+  //         acc.push({
+  //           key: children.id,
+  //           value: childrenName,
+  //         });
+  //         recursion(childrenName, children);
+  //       });
+  //     }
+  //   };
+  //   acc.push({
+  //     key: category.id,
+  //     value: category.name,
+  //   });
+  //   recursion(category.name, category);
+  //   return acc;
+  // }, []);
+
+  const categoryList = [];
+  categories.forEach((category) => {
+    categoryList.push({
+      key: category.id,
+      value: category.name,
+    });
+    const recursion = (parentName, parent) => {
+      if (parent.children.length > 0) {
+        parent.children.forEach((children) => {
+          const childrenName = `${parentName}-${children.name}`;
+          categoryList.push({
+            key: children.id,
+            value: childrenName,
+          });
+          recursion(childrenName, children);
+        });
+      }
+    };
+    recursion(category.name, category);
+  });
 
   return (
     <SC.PostFormDialog open={open} onClose={handleClose} maxWidth={false}>
@@ -70,17 +101,17 @@ const PostFormDialog: FC<Props> = ({ open, onClose, onSubmit }) => {
         <RadioGroup
           sx={{ display: 'block', marginBottom: '16px' }}
           items={postStatusList}
-          selectedValue={postStatus}
-          setSelectedValue={setPostStatus}
+          selectedValue={postInput.status}
+          setSelectedValue={(value: string) => handleChange('status', Number(value))}
           row={true}
         />
         <SelectBox
           sx={{ width: '120px', marginBottom: '24px' }}
           size="small"
-          items={items}
+          items={categoryList}
           label="카테고리"
-          selectedValue={categoryId}
-          setSelectedValue={setCategoryId}
+          selectedValue={postInput.categoryId}
+          setSelectedValue={(value: string) => handleChange('categoryId', Number(value))}
         />
         <TextField
           autoFocus
@@ -88,8 +119,8 @@ const PostFormDialog: FC<Props> = ({ open, onClose, onSubmit }) => {
           label="미리보기 내용"
           type="text"
           fullWidth
-          value={previewContents}
-          onChange={(e) => setPreviewContents(e.target.value)}
+          value={postInput.previewContents}
+          onChange={(e) => handleChange('previewContents', e.target.value)}
           multiline
           rows={5}
         />

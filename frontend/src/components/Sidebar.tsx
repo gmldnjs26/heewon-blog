@@ -71,16 +71,16 @@ const SC = {
 };
 
 const Sidebar: FC<Props> = ({ className }) => {
-  const categoryContext = useContext(CategoryContext);
+  const { categories, changeCategories } = useContext(CategoryContext);
+
+  // TODO: Page Component로 옮기는게 맞는건지?
   useEffect(() => {
     const fetchInit = async () => {
       const categoryList = await fetchCategoryList();
-      categoryContext.changeCategories(categoryList);
+      changeCategories(categoryList);
     };
     fetchInit();
-    // TODO: categoryContext를 넣으면 무한 로딩이 된다. 그걸 해결하지 않으면 안되는데 ㅠ
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [changeCategories]);
 
   const [openIdList, setOpenIdList] = useState<number[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category>({
@@ -91,7 +91,7 @@ const Sidebar: FC<Props> = ({ className }) => {
   });
   const router = useRouter();
 
-  const linkItemClickHanlder = (isOpenAccordion: boolean, category: Category) => {
+  const handleClickLinkItem = (isOpenAccordion: boolean, category: Category) => {
     if (isOpenAccordion) {
       setOpenIdList((prev) => {
         return prev.includes(category.id)
@@ -107,11 +107,11 @@ const Sidebar: FC<Props> = ({ className }) => {
   return (
     <SC.Sidebar className={className}>
       <SC.SidebarLinkList>
-        {categoryContext.categories.map((category) => (
+        {categories.map((category) => (
           <SC.SidebarLinkItem key={category.id}>
             <SC.SidebarLinkItemTop
               className={category.id === selectedCategory.id ? 'active' : ''}
-              onClick={linkItemClickHanlder.bind(this, category.children?.length > 0, category)}
+              onClick={() => handleClickLinkItem(category.children?.length > 0, category)}
             >
               {category.name}
               {category.children?.length > 0 && (
@@ -125,7 +125,7 @@ const Sidebar: FC<Props> = ({ className }) => {
                     <SC.SidebarLinkItemBodyItem
                       key={childCategory.id}
                       className={childCategory.id === selectedCategory.id ? 'active' : ''}
-                      onClick={linkItemClickHanlder.bind(this, false, childCategory)}
+                      onClick={() => handleClickLinkItem(false, childCategory)}
                     >
                       {childCategory.name}
                     </SC.SidebarLinkItemBodyItem>

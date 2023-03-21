@@ -8,6 +8,7 @@ import { PostInput, PostInputStep1 } from '~/types/global';
 type Props = {
   className?: string;
   onClick: (inpuData: PostInputStep1) => void;
+  onChange: (key: string, value: string) => void;
 };
 
 const SC = {

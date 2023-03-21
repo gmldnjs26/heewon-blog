@@ -3,12 +3,23 @@ import PostFormDialog from '../components/PostFormDialog';
 
 import type { NextPageWithLayout } from 'next';
 import FullScreenLayout from '../layouts/FullScreenLayout';
-import { createPost } from '../api';
+import { createPost, fetchCategoryList } from '../api';
 import { PostInput, PostInputStep1, PostInputStep2 } from '../types/global';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { CategoryContext } from '~/context/category-context';
 
 const Write: NextPageWithLayout = () => {
+  const { categories, changeCategories } = useContext(CategoryContext);
+
+  // TODO: Page Component로 옮기는게 맞는건지?
+  useEffect(() => {
+    const fetchInit = async () => {
+      const categoryList = await fetchCategoryList();
+      changeCategories(categoryList);
+    };
+    fetchInit();
+  }, [changeCategories]);
   const router = useRouter();
   const [postInput, setPostInput] = useState<PostInput>({
     title: '',
@@ -19,7 +30,16 @@ const Write: NextPageWithLayout = () => {
     status: 0,
   });
   const [open, setOpen] = useState(false);
-  const handleCLick = (inputData: PostInputStep1) => {
+
+  const handleChangePostInput = (key, value) => {
+    setPostInput((prev) => {
+      return {
+        ...prev,
+        [key]: value,
+      };
+    });
+  };
+  const handleClick = (inputData: PostInputStep1) => {
     setPostInput((prev) => {
       return {
         ...prev,
@@ -28,23 +48,19 @@ const Write: NextPageWithLayout = () => {
     });
     setOpen(true);
   };
-  const handleSubmit = async (inputData: PostInputStep2) => {
-    setPostInput((prev) => {
-      return {
-        ...prev,
-        ...inputData,
-      };
-    });
+  const handleSubmit = async () => {
     const result = await createPost(postInput);
     router.push(`/post/${result.id}`);
   };
   return (
     <>
-      <PostForm onClick={handleCLick} />
+      <PostForm onClick={handleClick} onChange={handleChangePostInput} />
       <PostFormDialog
         postInput={postInput}
+        categories={categories}
         open={open}
         onSubmit={handleSubmit}
+        onChange={handleChangePostInput}
         onClose={() => {
           setOpen(false);
         }}
