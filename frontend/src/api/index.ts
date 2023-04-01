@@ -1,9 +1,17 @@
 import axios, { AxiosResponse } from 'axios';
 import { Category, PostDetail, PostInput } from '../types/global';
 
+let baseURL;
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'development') {
+  baseURL = 'http://localhost:5050';
+} else {
+  baseURL = 'http://35.75.138.20:5050';
+}
+
 const $axios = axios.create({
   // FIXME: 배포할때 baseURL 수정하자
-  baseURL: 'http://localhost:5050',
+  baseURL,
   withCredentials: true,
 });
 
