@@ -2,7 +2,6 @@ import axios, { AxiosResponse } from 'axios';
 import { Category, PostDetail, PostInput } from '../types/global';
 
 let baseURL;
-console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
   baseURL = 'http://localhost:5050';
 } else {

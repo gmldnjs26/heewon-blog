@@ -1,10 +1,10 @@
-version: "3"
+version: "3.7"
 
 services:
   frontend-proxy:
     image: nginx:1.18.0
     ports:
-      - "8080:80"
+      - "80:80"
     restart: always
     volumes:
       - "./nginx/frontend-proxy.conf:/etc/nginx/nginx.conf"
@@ -16,9 +16,7 @@ services:
     ports:
       - "3000:3000"
   db:
-    platform: linux/x86_64 # M1은 5.7 설치를 위해 이렇게 해야한다.
     image: mysql:5.7
-    # command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
