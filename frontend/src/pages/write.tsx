@@ -48,7 +48,7 @@ const Write: NextPageWithLayout = () => {
     });
     setOpen(true);
   };
-  const handleSubmit = async () => {
+  const handleCreate = async () => {
     const result = await createPost(postInput);
     router.push(`/post/${result.id}`);
   };
@@ -59,7 +59,7 @@ const Write: NextPageWithLayout = () => {
         postInput={postInput}
         categories={categories}
         open={open}
-        onSubmit={handleSubmit}
+        onCreate={handleCreate}
         onChange={handleChangePostInput}
         onClose={() => {
           setOpen(false);

@@ -98,7 +98,6 @@ const PostForm: FC<Props> = ({ className, onSave }) => {
     ) as HTMLElement[];
     // TODO: .replace(/\n/g, ' ') 개행 문자열 제거? 고민중
     const textArray = tags.map((tag) => tag.innerText.trim());
-    console.log(textArray);
 
     onSave({
       title: postTitle,

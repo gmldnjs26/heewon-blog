@@ -19,7 +19,7 @@ type Props = {
   postInput: PostInput;
   categories: Category[];
   open: boolean;
-  onSubmit: () => void;
+  onCreate: () => void;
   onClose: () => void;
   onChange: (key: string, value: string | number) => void;
 };
@@ -37,15 +37,15 @@ const PostFormDialog: FC<Props> = ({
   categories,
   postInput,
   onClose,
-  onSubmit,
+  onCreate,
   onChange,
 }) => {
   const handleChange = (key: string, value: number | string) => {
     onChange(key, value);
   };
 
-  const handleSubmit = () => {
-    onSubmit();
+  const handleCreate = () => {
+    onCreate();
   };
 
   const handleClose = () => {
@@ -127,7 +127,7 @@ const PostFormDialog: FC<Props> = ({
       </SC.PostFormDialogContent>
       <DialogActions>
         <Button onClick={handleClose}>취소</Button>
-        <Button onClick={handleSubmit}>작성하기</Button>
+        <Button onClick={handleCreate}>작성하기</Button>
       </DialogActions>
     </SC.PostFormDialog>
   );
