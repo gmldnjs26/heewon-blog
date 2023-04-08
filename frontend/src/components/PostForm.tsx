@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, FC, KeyboardEvent, useRef, useState } from 'react';
 import MarkDownView from './MarkDownView';
 import Button from './Button';
 import { getLineAndCol } from '../utils/editHelper';
@@ -7,7 +7,7 @@ import { PostInput, PostInputStep1 } from '~/types/global';
 
 type Props = {
   className?: string;
-  onClick: (inpuData: PostInputStep1) => void;
+  onSave: (inpuData: PostInputStep1) => void;
   onChange: (key: string, value: string) => void;
 };
 
@@ -51,7 +51,7 @@ const SC = {
   })),
 };
 
-const PostForm: FC<Props> = ({ className, onClick }) => {
+const PostForm: FC<Props> = ({ className, onSave }) => {
   const [postTitle, setPostTitle] = useState('');
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setPostTitle(e.currentTarget.value);
@@ -90,11 +90,20 @@ const PostForm: FC<Props> = ({ className, onClick }) => {
       }
     }
   };
-  const handleClick = () => {
-    onClick({
+  const markDownViewSectionRef = useRef<HTMLDivElement>();
+
+  const handleSave = () => {
+    const tags = Array.from(
+      markDownViewSectionRef.current.querySelectorAll('p, li'),
+    ) as HTMLElement[];
+    // TODO: .replace(/\n/g, ' ') 개행 문자열 제거? 고민중
+    const textArray = tags.map((tag) => tag.innerText.trim());
+    console.log(textArray);
+
+    onSave({
       title: postTitle,
       contents: postContents,
-      previewContents: '',
+      previewContents: textArray.filter((text) => text !== '').join(' '),
     });
   };
   return (
@@ -115,12 +124,12 @@ const PostForm: FC<Props> = ({ className, onClick }) => {
             onKeyDown={handleKeyDownContents}
           ></textarea>
         </SC.PostFormSection>
-        <SC.PostFormSection>
+        <SC.PostFormSection ref={markDownViewSectionRef}>
           <MarkDownView markdown={postContents} />
         </SC.PostFormSection>
       </SC.PostFormBody>
       <SC.PostFormFooter>
-        <Button onClick={handleClick}>작성하기</Button>
+        <Button onClick={handleSave}>작성하기</Button>
       </SC.PostFormFooter>
     </SC.PostFormContainer>
   );

@@ -39,7 +39,7 @@ const Write: NextPageWithLayout = () => {
       };
     });
   };
-  const handleClick = (inputData: PostInputStep1) => {
+  const handleSave = (inputData: PostInputStep1) => {
     setPostInput((prev) => {
       return {
         ...prev,
@@ -54,7 +54,7 @@ const Write: NextPageWithLayout = () => {
   };
   return (
     <>
-      <PostForm onClick={handleClick} onChange={handleChangePostInput} />
+      <PostForm onSave={handleSave} onChange={handleChangePostInput} />
       <PostFormDialog
         postInput={postInput}
         categories={categories}

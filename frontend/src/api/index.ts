@@ -9,7 +9,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const $axios = axios.create({
-  // FIXME: 배포할때 baseURL 수정하자
   baseURL,
   withCredentials: true,
 });
