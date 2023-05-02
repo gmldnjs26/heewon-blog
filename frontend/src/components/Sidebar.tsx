@@ -1,7 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import { FC, useContext, useEffect, useState } from 'react';
-import { categories } from '../utils/dummy';
 import Accordion from './Accordion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Category } from '@/types/global';
