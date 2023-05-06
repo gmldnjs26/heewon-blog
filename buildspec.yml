@@ -18,10 +18,10 @@ phases:
       # - docker tag mysql:5.7 $ECR_REPOSITORY_URI/db:5.7
       # - docker push $ECR_REPOSITORY_URI/db:5.7
       - echo Tagging and pushing the frontend image...
-      - docker tag frontend:latest $ECR_REPOSITORY_URI
+      - docker tag heewon-blog_frontend:latest $ECR_REPOSITORY_URI
       # - docker push $ECR_REPOSITORY_URI/frontend:latest
       - echo Tagging and pushing the backend image...
-      - docker tag backend:latest $ECR_REPOSITORY_URI
+      - docker tag heewon-blog_backend:latest $ECR_REPOSITORY_URI
       #- docker push $ECR_REPOSITORY_URI/backend:latest
   post_build:
     commands:
