@@ -9,9 +9,20 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image...
-      - docker-compose build -t heewon-blog
-      - docker tag heewon-blog:latest $ECR_REPOSITORY_URI:latest
+      - echo Building the Docker images...
+      - docker-compose build
+      - echo Tagging and pushing the frontend-proxy image...
+      - docker tag nginx:1.18.0 $ECR_REPOSITORY_URI/frontend-proxy:1.18.0
+      - docker push $ECR_REPOSITORY_URI/frontend-proxy:1.18.0
+      - echo Tagging and pushing the db image...
+      - docker tag mysql:5.7 $ECR_REPOSITORY_URI/db:5.7
+      - docker push $ECR_REPOSITORY_URI/db:5.7
+      - echo Tagging and pushing the frontend image...
+      - docker tag frontend:latest $ECR_REPOSITORY_URI/frontend:latest
+      - docker push $ECR_REPOSITORY_URI/frontend:latest
+      - echo Tagging and pushing the backend image...
+      - docker tag backend:latest $ECR_REPOSITORY_URI/backend:latest
+      - docker push $ECR_REPOSITORY_URI/backend:latest
   post_build:
     commands:
       - echo Build completed on `date`
