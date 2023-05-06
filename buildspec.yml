@@ -51,8 +51,8 @@ phases:
             image="$service:latest"
           fi
           echo "Tagging and pushing the $service image..."
-          docker tag $image $ECR_REPOSITORY_URI/$service:latest
-          docker push $ECR_REPOSITORY_URI/$service:latest
+          docker tag $image $ECR_REPOSITORY_URI:$service
+          docker push $ECR_REPOSITORY_URI:$service
         done
   post_build:
     commands:
