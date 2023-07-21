@@ -99,7 +99,7 @@ const Sidebar: FC<Props> = ({ className }) => {
       });
     } else {
       setSelectedCategory(category);
-      router.push(`/category/${category.name}`);
+      router.push(`/categories/${category.name}`);
     }
   };
 

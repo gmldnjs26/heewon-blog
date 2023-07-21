@@ -21,8 +21,18 @@ func GetPost(c *fiber.Ctx) error {
 	return c.JSON(post)
 }
 
+type PostGetParams struct {
+	LastId       int    `query:"last_id"`
+	CategoryName string `query:"category_name"`
+}
+
 func GetPosts(c *fiber.Ctx) error {
 	var posts []models.Post
+	// var queryParams PostGetParams
+	// // 쿼리 파라미터를 파싱하여 queryParams에 저장
+	// if err := c.QueryParser(&queryParams); err != nil {
+	// 	return err
+	// }
 	conditions := make(map[string]interface{})
 	var joins string
 	categoryName := c.Query("category_name", "")
@@ -35,7 +45,7 @@ func GetPosts(c *fiber.Ctx) error {
 	if lastId != "" {
 		conditions["post.id > ?"] = lastId
 	}
-	database.DB.Joins(joins).Where(conditions).Limit(20).Find(&posts)
+	database.DB.Joins(joins).Where(conditions).Limit(10).Find(&posts)
 	return c.JSON(posts)
 }
 

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, MutableRefObject } from 'react';
 import { boxShadow } from '../utils/styleHelper';
 import ChatIcon from '@mui/icons-material/Chat';
 import { styled } from '@mui/material/styles';
@@ -62,12 +62,8 @@ const SC = {
 };
 
 const PostItem: FC<Props> = ({ className, post }) => {
-  const router = useRouter();
-  const clickHandler = () => {
-    router.push(`/post/${post.id}`);
-  };
   return (
-    <SC.PostItem className={className} onClick={clickHandler}>
+    <SC.PostItem className={className}>
       <SC.PostImageWrapper>
         <img src="#" />
       </SC.PostImageWrapper>

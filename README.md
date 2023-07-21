@@ -61,3 +61,23 @@ https://www.erdcloud.com/d/g6asDHhkRHc9qbFXr
 | 글 작성 2                                                                                       | 글 임시저장                                                                                       |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | ![글 작성](https://github.com/gmldnjs26/react-heewon-blog/blob/develop/img/write2.png?raw=true) | ![글 상세](https://github.com/gmldnjs26/react-heewon-blog/blob/develop/img/임시저장.png?raw=true) |
+
+## 개밞환경
+
+### Dev
+백엔드 서버와 DB는 도커 컨테이너를 이용
+프론트는 로컬서버를 이용하고 있다.
+```bash
+docker-compose -f docker-compose.dev.yml up
+```
+```bash
+cd frontend
+```
+```bash
+npm run dev
+```
+
+### Prod
+```bash
+docker-compose up
+```
