@@ -1,12 +1,12 @@
 export const getLineAndCol = (text: string, pos: number) => {
-  const lines = text.split('\n');
-  const beforeLines = text.substring(0, pos).split('\n');
-  const line = beforeLines.length;
-  const col = beforeLines[beforeLines.length - 1].length;
+  const lines = text.split('\n')
+  const beforeLines = text.substring(0, pos).split('\n')
+  const line = beforeLines.length
+  const col = beforeLines[beforeLines.length - 1].length
 
-  const curLine = lines[beforeLines.length - 1];
-  const prevLine = beforeLines.length > 1 ? beforeLines[beforeLines.length - 2] : null;
-  const nextLine = lines.length > beforeLines.length ? lines[beforeLines.length] : null;
+  const curLine = lines[beforeLines.length - 1]
+  const prevLine = beforeLines.length > 1 ? beforeLines[beforeLines.length - 2] : null
+  const nextLine = lines.length > beforeLines.length ? lines[beforeLines.length] : null
 
   return {
     line,
@@ -16,5 +16,5 @@ export const getLineAndCol = (text: string, pos: number) => {
     curLine,
     prevLine,
     nextLine,
-  };
-};
+  }
+}

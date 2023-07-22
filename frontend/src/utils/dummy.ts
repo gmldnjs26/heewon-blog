@@ -153,14 +153,14 @@ A table:
       },
     ],
   },
-];
+]
 
 export type Category = {
-  id: number;
-  parentId: number; // 0는 자기가 제일 상위 카테고리일때
-  name: string;
-  children?: Category[];
-};
+  id: number
+  parentId: number // 0는 자기가 제일 상위 카테고리일때
+  name: string
+  children?: Category[]
+}
 
 export const categories: Category[] = [
   {
@@ -214,4 +214,4 @@ export const categories: Category[] = [
       },
     ],
   },
-];
+]

@@ -1,15 +1,15 @@
-import { styled } from '@mui/material/styles';
-import { useRouter } from 'next/router';
-import { FC, useContext, useEffect, useState } from 'react';
-import Accordion from './Accordion';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Category } from '@/types/global';
-import { CategoryContext } from '~/context/category-context';
-import { fetchCategoryList } from '~/api';
+import { styled } from '@mui/material/styles'
+import { useRouter } from 'next/router'
+import { FC, useContext, useEffect, useState } from 'react'
+import Accordion from './Accordion'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { Category } from '@/types/global'
+import { CategoryContext } from '~/context/category-context'
+import { fetchCategoryList } from '~/api'
 
 type Props = {
-  className?: string;
-};
+  className?: string
+}
 
 const SC = {
   Sidebar: styled('div')(({ theme }) => ({
@@ -67,41 +67,41 @@ const SC = {
       transform: 'rotate(180deg)',
     },
   })),
-};
+}
 
 const Sidebar: FC<Props> = ({ className }) => {
-  const { categories, changeCategories } = useContext(CategoryContext);
+  const { categories, changeCategories } = useContext(CategoryContext)
 
   // TODO: Page Component로 옮기는게 맞는건지?
   useEffect(() => {
     const fetchInit = async () => {
-      const categoryList = await fetchCategoryList();
-      changeCategories(categoryList);
-    };
-    fetchInit();
-  }, [changeCategories]);
+      const categoryList = await fetchCategoryList()
+      changeCategories(categoryList)
+    }
+    fetchInit()
+  }, [changeCategories])
 
-  const [openIdList, setOpenIdList] = useState<number[]>([]);
+  const [openIdList, setOpenIdList] = useState<number[]>([])
   const [selectedCategory, setSelectedCategory] = useState<Category>({
     id: undefined,
     name: '',
     parentId: undefined,
     children: [],
-  });
-  const router = useRouter();
+  })
+  const router = useRouter()
 
   const handleClickLinkItem = (isOpenAccordion: boolean, category: Category) => {
     if (isOpenAccordion) {
       setOpenIdList((prev) => {
         return prev.includes(category.id)
           ? prev.filter((e) => e !== category.id)
-          : [...prev, category.id];
-      });
+          : [...prev, category.id]
+      })
     } else {
-      setSelectedCategory(category);
-      router.push(`/categories/${category.name}`);
+      setSelectedCategory(category)
+      router.push(`/categories/${category.name}`)
     }
-  };
+  }
 
   return (
     <SC.Sidebar className={className}>
@@ -136,7 +136,7 @@ const Sidebar: FC<Props> = ({ className }) => {
         ))}
       </SC.SidebarLinkList>
     </SC.Sidebar>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

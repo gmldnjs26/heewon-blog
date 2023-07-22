@@ -1,28 +1,28 @@
-import type { AppPropsWithLayout } from 'next/app';
+import type { AppPropsWithLayout } from 'next/app'
 
-import Head from 'next/head';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { CacheProvider, EmotionCache } from '@emotion/react';
-import theme from '../utils/theme';
-import createEmotionCache from '../utils/createEmotionCache';
+import Head from 'next/head'
+import { ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import { CacheProvider, EmotionCache } from '@emotion/react'
+import theme from '../utils/theme'
+import createEmotionCache from '../utils/createEmotionCache'
 
-const clientSideEmotionCache = createEmotionCache();
+const clientSideEmotionCache = createEmotionCache()
 
 type AppProps<P = any> = {
-  pageProps: P;
-  emotionCache?: EmotionCache;
-} & Omit<AppPropsWithLayout<P>, 'pageProps'>;
+  pageProps: P
+  emotionCache?: EmotionCache
+} & Omit<AppPropsWithLayout<P>, 'pageProps'>
 
-import '~/styles/reset.scss';
-import '~/styles/common.scss';
-import DefaultLayout from '~/layouts/DefaultLayout';
-import { UIContextProvider } from '~/context/ui-contenxt';
-import { CategoryContextProvider } from '~/context/category-context';
-import { PostContextProvider } from '~/context/post-context';
+import '~/styles/reset.scss'
+import '~/styles/common.scss'
+import DefaultLayout from '~/layouts/DefaultLayout'
+import { UIContextProvider } from '~/context/ui-contenxt'
+import { CategoryContextProvider } from '~/context/category-context'
+import { PostContextProvider } from '~/context/post-context'
 
 const App = ({ Component, pageProps, emotionCache = clientSideEmotionCache }: AppProps<any>) => {
-  const getLayout = Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>);
+  const getLayout = Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>)
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -40,7 +40,7 @@ const App = ({ Component, pageProps, emotionCache = clientSideEmotionCache }: Ap
         </CategoryContextProvider>
       </UIContextProvider>
     </CacheProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

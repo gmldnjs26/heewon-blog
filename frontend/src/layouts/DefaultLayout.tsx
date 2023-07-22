@@ -1,17 +1,17 @@
-import { styled } from '@mui/material/styles';
-import { FC, ReactElement, useContext } from 'react';
+import { styled } from '@mui/material/styles'
+import { FC, ReactElement, useContext } from 'react'
 
-import { sp_view } from '../utils/styleHelper';
+import { sp_view } from '../utils/styleHelper'
 
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import LoadingOverlay from '~/components/LoadingOverlay';
-import { UIContext } from '~/context/ui-contenxt';
-import Router from 'next/router';
+import Header from '../components/Header'
+import Sidebar from '../components/Sidebar'
+import LoadingOverlay from '~/components/LoadingOverlay'
+import { UIContext } from '~/context/ui-contenxt'
+import Router from 'next/router'
 
 type LayoutProps = Required<{
-  readonly children: ReactElement;
-}>;
+  readonly children: ReactElement
+}>
 
 const SC = {
   App: styled('div')(({ theme }) => ({
@@ -53,15 +53,15 @@ const SC = {
       },
     },
   })),
-};
+}
 
 const DefaultLayout: FC<LayoutProps> = ({ children }) => {
-  const uiContext = useContext(UIContext);
+  const uiContext = useContext(UIContext)
   Router.events.on('routeChangeStart', (url) => {
-    uiContext.changePageLoading(true);
-  });
-  Router.events.on('routeChangeComplete', () => uiContext.changePageLoading(false));
-  Router.events.on('routeChangeError', () => uiContext.changePageLoading(false));
+    uiContext.changePageLoading(true)
+  })
+  Router.events.on('routeChangeComplete', () => uiContext.changePageLoading(false))
+  Router.events.on('routeChangeError', () => uiContext.changePageLoading(false))
   return (
     <SC.App>
       {uiContext.pageLoading && <LoadingOverlay />}
@@ -73,7 +73,7 @@ const DefaultLayout: FC<LayoutProps> = ({ children }) => {
         </SC.Main>
       </SC.Container>
     </SC.App>
-  );
-};
+  )
+}
 
-export default DefaultLayout;
+export default DefaultLayout

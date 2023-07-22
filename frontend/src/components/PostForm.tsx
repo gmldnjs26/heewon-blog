@@ -1,15 +1,15 @@
-import { styled } from '@mui/material/styles';
-import { ChangeEvent, FC, KeyboardEvent, useRef, useState } from 'react';
-import MarkDownView from './MarkDownView';
-import Button from './Button';
-import { getLineAndCol } from '../utils/editHelper';
-import { PostInput, PostInputStep1 } from '~/types/global';
+import { styled } from '@mui/material/styles'
+import { ChangeEvent, FC, KeyboardEvent, useRef, useState } from 'react'
+import MarkDownView from './MarkDownView'
+import Button from './Button'
+import { getLineAndCol } from '../utils/editHelper'
+import { PostInput, PostInputStep1 } from '~/types/global'
 
 type Props = {
-  className?: string;
-  onSave: (inpuData: PostInputStep1) => void;
-  onChange: (key: string, value: string) => void;
-};
+  className?: string
+  onSave: (inpuData: PostInputStep1) => void
+  onChange: (key: string, value: string) => void
+}
 
 const SC = {
   PostFormContainer: styled('div')(({ theme }) => ({})),
@@ -49,62 +49,62 @@ const SC = {
     marginTop: '24px',
     textAlign: 'right',
   })),
-};
+}
 
 const PostForm: FC<Props> = ({ className, onSave }) => {
-  const [postTitle, setPostTitle] = useState('');
+  const [postTitle, setPostTitle] = useState('')
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setPostTitle(e.currentTarget.value);
-  };
+    setPostTitle(e.currentTarget.value)
+  }
 
-  const [postContents, setPostContents] = useState('');
+  const [postContents, setPostContents] = useState('')
   const handleChangeContents = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setPostContents(e.currentTarget.value);
-  };
+    setPostContents(e.currentTarget.value)
+  }
   const handleKeyDownContents = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    const { keyCode, key, currentTarget } = e;
+    const { keyCode, key, currentTarget } = e
     if (keyCode === 13 || key === 'Enter') {
-      const text = currentTarget.value;
-      const curPos = currentTarget.selectionStart;
-      const lineInfo = getLineAndCol(text, curPos);
+      const text = currentTarget.value
+      const curPos = currentTarget.selectionStart
+      const lineInfo = getLineAndCol(text, curPos)
 
       const emptyCurrentLine = () => {
-        const newValue = currentTarget.value.substring(0, curPos - lineInfo.curLine.length);
-        setPostContents(newValue);
-      };
+        const newValue = currentTarget.value.substring(0, curPos - lineInfo.curLine.length)
+        setPostContents(newValue)
+      }
 
       // "- "을 체크
-      const isSymbol = lineInfo.curLine.match(/^(\s*?)\- /);
+      const isSymbol = lineInfo.curLine.match(/^(\s*?)\- /)
 
       if (isSymbol) {
         // "- " 뒤로 아무 문자도 없으면 심볼추가안함
         if (/^(\s*?)\- $/.test(lineInfo.curLine)) {
-          emptyCurrentLine();
-          return;
+          emptyCurrentLine()
+          return
         }
         setTimeout(() => {
           setPostContents((prev) => {
-            return prev + isSymbol[0];
-          });
-        });
+            return prev + isSymbol[0]
+          })
+        })
       }
     }
-  };
-  const markDownViewSectionRef = useRef<HTMLDivElement>();
+  }
+  const markDownViewSectionRef = useRef<HTMLDivElement>()
 
   const handleSave = () => {
     const tags = Array.from(
       markDownViewSectionRef.current.querySelectorAll('p, li'),
-    ) as HTMLElement[];
+    ) as HTMLElement[]
     // TODO: .replace(/\n/g, ' ') 개행 문자열 제거? 고민중
-    const textArray = tags.map((tag) => tag.innerText.trim());
+    const textArray = tags.map((tag) => tag.innerText.trim())
 
     onSave({
       title: postTitle,
       contents: postContents,
       previewContents: textArray.filter((text) => text !== '').join(' '),
-    });
-  };
+    })
+  }
   return (
     <SC.PostFormContainer>
       <SC.PostFormHeader>
@@ -131,7 +131,7 @@ const PostForm: FC<Props> = ({ className, onSave }) => {
         <Button onClick={handleSave}>작성하기</Button>
       </SC.PostFormFooter>
     </SC.PostFormContainer>
-  );
-};
+  )
+}
 
-export default PostForm;
+export default PostForm

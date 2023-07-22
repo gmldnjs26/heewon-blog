@@ -1,14 +1,14 @@
-import { styled } from '@mui/material/styles';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import React, { useState, FC } from 'react';
+import { styled } from '@mui/material/styles'
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
+import Box from '@mui/material/Box'
+import React, { useState, FC } from 'react'
 
 type Props = {
-  styles: Object;
-};
+  styles: Object
+}
 interface StyledTabProps {
-  label: string;
+  label: string
 }
 
 const AntTabs = styled(Tabs)({
@@ -16,7 +16,7 @@ const AntTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
     backgroundColor: '#eec07b',
   },
-});
+})
 
 const AntTab = styled((props: StyledTabProps) => <Tab disableRipple {...props} />)(({ theme }) => ({
   textTransform: 'none',
@@ -40,14 +40,14 @@ const AntTab = styled((props: StyledTabProps) => <Tab disableRipple {...props} /
   '&.Mui-focusVisible': {
     backgroundColor: '#d1eaff',
   },
-}));
+}))
 
 const Navigation: FC<Props> = (props) => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(0)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+    setValue(newValue)
+  }
   return (
     <Box {...props.styles}>
       <AntTabs
@@ -65,7 +65,7 @@ const Navigation: FC<Props> = (props) => {
         <AntTab label="Go" />
       </AntTabs>
     </Box>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation

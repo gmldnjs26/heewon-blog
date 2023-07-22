@@ -1,15 +1,15 @@
-import React from 'react';
-import { styled } from '@mui/material/styles';
-import { FC, ReactNode } from 'react';
-import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import remarkGfm from 'remark-gfm';
+import React from 'react'
+import { styled } from '@mui/material/styles'
+import { FC, ReactNode } from 'react'
+import ReactMarkdown from 'react-markdown'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import remarkGfm from 'remark-gfm'
 
 type Props = {
-  className?: string;
-  children?: ReactNode;
-  markdown: string;
-};
+  className?: string
+  children?: ReactNode
+  markdown: string
+}
 
 const SC = {
   MarkDown: styled(ReactMarkdown)(({ theme }) => ({})),
@@ -68,7 +68,7 @@ const SC = {
     whiteSpace: 'pre-wrap',
     margin: '8px 0',
   })),
-};
+}
 
 const MarkDownView: FC<Props> = React.memo(function MarkdownView({ className, markdown }) {
   return (
@@ -81,45 +81,45 @@ const MarkDownView: FC<Props> = React.memo(function MarkdownView({ className, ma
             <SC.H1 id={children as string} className={className}>
               {children}
             </SC.H1>
-          );
+          )
         },
         h2({ className, children, ...props }) {
           return (
             <SC.H2 id={children as string} className={className}>
               {children}
             </SC.H2>
-          );
+          )
         },
         h3({ className, children, ...props }) {
           return (
             <SC.H3 id={children as string} className={className}>
               {children}
             </SC.H3>
-          );
+          )
         },
         ul({ className, children, ...props }) {
-          return <SC.Ul className={className}>{children}</SC.Ul>;
+          return <SC.Ul className={className}>{children}</SC.Ul>
         },
         blockquote({ className, children, ...props }) {
-          return <SC.Blockquote className={className}>{children}</SC.Blockquote>;
+          return <SC.Blockquote className={className}>{children}</SC.Blockquote>
         },
         table({ className, children, ...props }) {
-          return <SC.Table className={className}>{children}</SC.Table>;
+          return <SC.Table className={className}>{children}</SC.Table>
         },
         th({ className, children, ...props }) {
-          return <SC.Th className={className}>{children}</SC.Th>;
+          return <SC.Th className={className}>{children}</SC.Th>
         },
         td({ className, children, ...props }) {
-          return <SC.Td className={className}>{children}</SC.Td>;
+          return <SC.Td className={className}>{children}</SC.Td>
         },
         p({ className, children, ...props }) {
-          return <SC.P className={className}>{children}</SC.P>;
+          return <SC.P className={className}>{children}</SC.P>
         },
         strong({ className, children, ...props }) {
-          return <SC.Strong className={className}>{children}</SC.Strong>;
+          return <SC.Strong className={className}>{children}</SC.Strong>
         },
         code({ inline, className, children, ...props }) {
-          const match = /language-(\w+)/.exec(className || '');
+          const match = /language-(\w+)/.exec(className || '')
           return !inline && match ? (
             <SyntaxHighlighter language={match[1]} PreTag="div" {...props}>
               {String(children).replace(/\n$/, '')}
@@ -128,13 +128,13 @@ const MarkDownView: FC<Props> = React.memo(function MarkdownView({ className, ma
             <code className={className} {...props}>
               {children}
             </code>
-          );
+          )
         },
       }}
     >
       {markdown}
     </SC.MarkDown>
-  );
-});
+  )
+})
 
-export default MarkDownView;
+export default MarkDownView

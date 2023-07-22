@@ -1,9 +1,9 @@
-import { sp_view } from '../utils/styleHelper';
-import { styled } from '@mui/material/styles';
+import { sp_view } from '../utils/styleHelper'
+import { styled } from '@mui/material/styles'
 
-import Link from 'next/link';
-import Navigation from './Navigation';
-import CreateIcon from '@mui/icons-material/Create';
+import Link from 'next/link'
+import Navigation from './Navigation'
+import CreateIcon from '@mui/icons-material/Create'
 
 const SC = {
   Header: styled('div')(({ theme }) => ({
@@ -48,7 +48,7 @@ const SC = {
     marginRight: '8px',
     width: '24px',
   })),
-};
+}
 
 const Header = () => {
   return (
@@ -66,7 +66,7 @@ const Header = () => {
         </SC.WriteLink>
       </SC.Right>
     </SC.Header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

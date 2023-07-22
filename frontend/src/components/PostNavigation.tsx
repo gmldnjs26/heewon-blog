@@ -1,12 +1,12 @@
-import { styled } from '@mui/material/styles';
-import { FC, ReactNode } from 'react';
+import { styled } from '@mui/material/styles'
+import { FC, ReactNode } from 'react'
 
 type Props = {
-  className?: string;
-  children?: ReactNode;
-  navInfo: { deep: number; text: string }[];
-  activeNavId: string;
-};
+  className?: string
+  children?: ReactNode
+  navInfo: { deep: number; text: string }[]
+  activeNavId: string
+}
 
 const SC = {
   PostNavigation: styled('div')(({ theme }) => ({
@@ -50,7 +50,7 @@ const SC = {
       color: 'rgba(0, 0, 0, 0.9)',
     },
   })),
-};
+}
 
 const PostNavigation: FC<Props> = ({ className, navInfo, activeNavId }) => {
   return (
@@ -61,25 +61,25 @@ const PostNavigation: FC<Props> = ({ className, navInfo, activeNavId }) => {
             <SC.PostNavH1 className={activeNavId === info.text ? 'active' : ''} key={idx}>
               <SC.PostNavLink href={'#' + info.text}>{info.text}</SC.PostNavLink>
             </SC.PostNavH1>
-          );
+          )
         }
         if (info.deep === 2) {
           return (
             <SC.PostNavH2 className={activeNavId === info.text ? 'active' : ''} key={idx}>
               <SC.PostNavLink href={'#' + info.text}>{info.text}</SC.PostNavLink>
             </SC.PostNavH2>
-          );
+          )
         }
         if (info.deep === 3) {
           return (
             <SC.PostNavH3 className={activeNavId === info.text ? 'active' : ''} key={idx}>
               <SC.PostNavLink href={'#' + info.text}>{info.text}</SC.PostNavLink>
             </SC.PostNavH3>
-          );
+          )
         }
       })}
     </SC.PostNavigation>
-  );
-};
+  )
+}
 
-export default PostNavigation;
+export default PostNavigation

@@ -11,4 +11,4 @@ export const postStatusList = [
     key: 2,
     value: '비공개',
   },
-];
+]

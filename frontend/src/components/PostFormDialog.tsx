@@ -1,28 +1,28 @@
 // 카테고리 설정, 글 미리보기 글 썸네일, 비공개 공개 등등을 입력받는 모달
-import { styled } from '@mui/material/styles';
-import { FC, ReactNode } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import { Category, PostInput } from '~/types/global';
-import SelectBox from './SelectBox';
-import RadioGroup from './RadioGroup';
+import { styled } from '@mui/material/styles'
+import { FC, ReactNode } from 'react'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import { Category, PostInput } from '~/types/global'
+import SelectBox from './SelectBox'
+import RadioGroup from './RadioGroup'
 
-import { postStatusList } from '~/utils/const';
+import { postStatusList } from '~/utils/const'
 
 type Props = {
-  className?: string;
-  children?: ReactNode;
-  postInput: PostInput;
-  categories: Category[];
-  open: boolean;
-  onCreate: () => void;
-  onClose: () => void;
-  onChange: (key: string, value: string | number) => void;
-};
+  className?: string
+  children?: ReactNode
+  postInput: PostInput
+  categories: Category[]
+  open: boolean
+  onCreate: () => void
+  onClose: () => void
+  onChange: (key: string, value: string | number) => void
+}
 
 const SC = {
   PostFormDialog: styled(Dialog)(({ theme }) => ({})),
@@ -30,7 +30,7 @@ const SC = {
     minWidth: '500px',
   })),
   PostFormDialogContent: styled(DialogContent)(({ theme }) => ({})),
-};
+}
 
 const PostFormDialog: FC<Props> = ({
   open,
@@ -41,16 +41,16 @@ const PostFormDialog: FC<Props> = ({
   onChange,
 }) => {
   const handleChange = (key: string, value: number | string) => {
-    onChange(key, value);
-  };
+    onChange(key, value)
+  }
 
   const handleCreate = () => {
-    onCreate();
-  };
+    onCreate()
+  }
 
   const handleClose = () => {
-    onClose();
-  };
+    onClose()
+  }
   // CHATGPT:
   // const items = categories.reduce((acc, category) => {
   //   const recursion = (parentName, parent) => {
@@ -73,26 +73,26 @@ const PostFormDialog: FC<Props> = ({
   //   return acc;
   // }, []);
 
-  const categoryList = [];
+  const categoryList = []
   categories.forEach((category) => {
     categoryList.push({
       key: category.id,
       value: category.name,
-    });
+    })
     const recursion = (parentName, parent) => {
       if (parent.children.length > 0) {
         parent.children.forEach((children) => {
-          const childrenName = `${parentName}-${children.name}`;
+          const childrenName = `${parentName}-${children.name}`
           categoryList.push({
             key: children.id,
             value: childrenName,
-          });
-          recursion(childrenName, children);
-        });
+          })
+          recursion(childrenName, children)
+        })
       }
-    };
-    recursion(category.name, category);
-  });
+    }
+    recursion(category.name, category)
+  })
 
   return (
     <SC.PostFormDialog open={open} onClose={handleClose} maxWidth={false}>
@@ -130,7 +130,7 @@ const PostFormDialog: FC<Props> = ({
         <Button onClick={handleCreate}>작성하기</Button>
       </DialogActions>
     </SC.PostFormDialog>
-  );
-};
+  )
+}
 
-export default PostFormDialog;
+export default PostFormDialog

@@ -1,23 +1,23 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react'
 
 export const CategoryContext = React.createContext({
   categories: [],
   selectedCategory: {},
   changeCategories: ([]) => {},
   changeSelectedCategory: ({}) => {},
-});
+})
 
 export const CategoryContextProvider = (props) => {
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [categories, setCategories] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState([])
 
   const handleChangeCategories = useCallback((data) => {
-    setCategories([...data]);
-  }, []);
+    setCategories([...data])
+  }, [])
 
   const handleChangeSelectedCategory = useCallback((data) => {
-    setSelectedCategory({ ...data });
-  }, []);
+    setSelectedCategory({ ...data })
+  }, [])
 
   return (
     <CategoryContext.Provider
@@ -30,5 +30,5 @@ export const CategoryContextProvider = (props) => {
     >
       {props.children}
     </CategoryContext.Provider>
-  );
-};
+  )
+}

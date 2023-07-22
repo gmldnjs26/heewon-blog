@@ -1,13 +1,13 @@
-import { styled } from '@mui/material/styles';
-import { FC, ReactElement, useContext } from 'react';
+import { styled } from '@mui/material/styles'
+import { FC, ReactElement, useContext } from 'react'
 
-import Header from '../components/Header';
-import LoadingOverlay from '~/components/LoadingOverlay';
-import { UIContext } from '~/context/ui-contenxt';
+import Header from '../components/Header'
+import LoadingOverlay from '~/components/LoadingOverlay'
+import { UIContext } from '~/context/ui-contenxt'
 
 type LayoutProps = Required<{
-  readonly children: ReactElement;
-}>;
+  readonly children: ReactElement
+}>
 
 const SC = {
   App: styled('div')(({ theme }) => ({
@@ -26,10 +26,10 @@ const SC = {
   MainWrapper: styled('div')(({ theme }) => ({
     margin: '0 16px',
   })),
-};
+}
 
 const DefaultLayout: FC<LayoutProps> = ({ children }) => {
-  const uiContext = useContext(UIContext);
+  const uiContext = useContext(UIContext)
   return (
     <SC.App>
       {uiContext.pageLoading && <LoadingOverlay />}
@@ -40,7 +40,7 @@ const DefaultLayout: FC<LayoutProps> = ({ children }) => {
         </SC.Main>
       </SC.Container>
     </SC.App>
-  );
-};
+  )
+}
 
-export default DefaultLayout;
+export default DefaultLayout

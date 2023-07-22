@@ -1,11 +1,11 @@
-import { styled } from '@mui/material/styles';
-import { FC, ReactNode } from 'react';
-import Loading from './Loading';
+import { styled } from '@mui/material/styles'
+import { FC, ReactNode } from 'react'
+import Loading from './Loading'
 
 type Props = {
-  className?: string;
-  children?: ReactNode;
-};
+  className?: string
+  children?: ReactNode
+}
 
 const SC = {
   Overlay: styled('div')(({ theme }) => ({
@@ -27,7 +27,7 @@ const SC = {
     transform: 'translate(-50%, -50%)',
     borderRadius: '8px',
   })),
-};
+}
 
 const LoadingOverlay: FC<Props> = () => {
   return (
@@ -36,7 +36,7 @@ const LoadingOverlay: FC<Props> = () => {
         <Loading />
       </SC.Spinner>
     </SC.Overlay>
-  );
-};
+  )
+}
 
-export default LoadingOverlay;
+export default LoadingOverlay

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 export const PostContext = React.createContext({
   posts: [],
@@ -7,17 +7,17 @@ export const PostContext = React.createContext({
   changePosts: (value: []) => {},
   changeIsNeedMorePosts: (value: boolean) => {},
   changeIsLoadingPosts: (value: boolean) => {},
-});
+})
 
 export const PostContextProvider = (props) => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([])
 
   const [isNeedMorePosts, setIsNeedMorePosts] = useState(false)
   const [isLoadingPosts, setIsLoadingPosts] = useState(false)
 
   const handleChangePosts = (data) => {
-    setPosts([...data]);
-  };
+    setPosts([...data])
+  }
 
   return (
     <PostContext.Provider
@@ -32,5 +32,5 @@ export const PostContextProvider = (props) => {
     >
       {props.children}
     </PostContext.Provider>
-  );
-};
+  )
+}

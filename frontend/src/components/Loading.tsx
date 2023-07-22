@@ -1,25 +1,25 @@
-import { keyframes, styled } from '@mui/material/styles';
-import { FC, ReactNode } from 'react';
+import { keyframes, styled } from '@mui/material/styles'
+import { FC, ReactNode } from 'react'
 
 type Props = {
-  className?: string;
-  children?: ReactNode;
-  isOverlay?: boolean;
-};
+  className?: string
+  children?: ReactNode
+  isOverlay?: boolean
+}
 
 const skChase = keyframes`
   100% { transform: rotate(360deg); }
-`;
+`
 const skChaseDot = keyframes`
   80%, 100% { transform: rotate(360deg); } 
-`;
+`
 const skChaseDotBefore = keyframes`
   50% {
     transform: scale(0.4); 
   } 100%, 0% {
     transform: scale(1.0); 
   }
-`;
+`
 
 const SC = {
   Overlay: styled('div')(({ theme }) => ({
@@ -76,7 +76,7 @@ const SC = {
     '&:nth-of-type(5):before': { animationDelay: '-0.7s' },
     '&:nth-of-type(6):before': { animationDelay: '-0.6s' },
   })),
-};
+}
 
 const Loading: FC<Props> = ({ isOverlay }) => {
   return !isOverlay ? (
@@ -101,7 +101,7 @@ const Loading: FC<Props> = ({ isOverlay }) => {
         </SC.SkChase>
       </SC.Spinner>
     </SC.Overlay>
-  );
-};
+  )
+}
 
-export default Loading;
+export default Loading

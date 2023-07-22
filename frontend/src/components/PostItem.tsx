@@ -1,14 +1,14 @@
-import { FC, MutableRefObject } from 'react';
-import { boxShadow } from '../utils/styleHelper';
-import ChatIcon from '@mui/icons-material/Chat';
-import { styled } from '@mui/material/styles';
-import { useRouter } from 'next/router';
-import { PostDetail } from '../types/global';
+import { FC, MutableRefObject } from 'react'
+import { boxShadow } from '../utils/styleHelper'
+import ChatIcon from '@mui/icons-material/Chat'
+import { styled } from '@mui/material/styles'
+import { useRouter } from 'next/router'
+import { PostDetail } from '../types/global'
 
 type Props = {
-  className?: string;
-  post: PostDetail;
-};
+  className?: string
+  post: PostDetail
+}
 
 const SC = {
   PostItem: styled('li')(({ theme }) => ({
@@ -59,7 +59,7 @@ const SC = {
     fontSize: '16px',
     marginRight: '4px',
   })),
-};
+}
 
 const PostItem: FC<Props> = ({ className, post }) => {
   return (
@@ -80,7 +80,7 @@ const PostItem: FC<Props> = ({ className, post }) => {
         </SC.PostMetaInfo>
       </SC.PostMainWrapper>
     </SC.PostItem>
-  );
-};
+  )
+}
 
-export default PostItem;
+export default PostItem

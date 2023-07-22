@@ -1,12 +1,13 @@
 {
-  "root": true, 
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier"],
+  "root": true,
+  "parser": "@typescript-eslint/parser", // TypeScript 코드를 분석하기 위한 파서를 지정합니다.
+  "plugins": ["@typescript-eslint", "prettier"], // 사용할 ESLint 플러그인을 지정합니다. 여기서는 TypeScript와 Prettier 플러그인을 사용합니다.
   "parserOptions": {
-    "project": "./tsconfig.json",
-    "createDefaultProgram": true
+    "project": "./tsconfig.json", // TypeScript 설정 파일의 경로를 지정합니다. 이 설정은 TypeScript 코드를 ESLint가 이해할 수 있도록 돕습니다.
+    "createDefaultProgram": true // 기본 프로그램을 생성하도록 지시합니다. 이 옵션은 파서가 TypeScript 프로젝트를 처리하는 방식에 영향을 줍니다.
   },
-  "env": { // 전역객체를 eslint가 인식하는 구간
+  "env": {
+    // 전역객체를 eslint가 인식하는 구간
     "browser": true, // document나 window 인식되게 함
     "node": true,
     "es6": true
@@ -20,8 +21,8 @@
   ],
   "rules": {
     "react/react-in-jsx-scope": "off", // react 17부턴 import 안해도돼서 기능 끔
-    // 경고표시, 파일 확장자를 .ts나 .tsx 모두 허용함
-    "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
-    "no-useless-catch": "off" // 불필요한 catch 못쓰게 하는 기능 끔
+    "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }], // 경고표시, 파일 확장자를 .ts나 .tsx 모두 허용함
+    "no-useless-catch": "off", // 불필요한 catch 못쓰게 하는 기능 끔
+    "@typescript-eslint/no-unused-vars": "warn"    
   }
 }
