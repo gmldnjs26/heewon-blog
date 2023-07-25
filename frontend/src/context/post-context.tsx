@@ -1,33 +1,53 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import { fetchPosts } from '~/api'
+import { Post } from '~/types/global'
 
 export const PostContext = React.createContext({
   posts: [],
-  isNeedMorePosts: false,
   isLoadingPosts: false,
-  changePosts: (value: []) => {},
-  changeIsNeedMorePosts: (value: boolean) => {},
-  changeIsLoadingPosts: (value: boolean) => {},
+  hasMorePosts: true,
+  handleSetPosts: (value: Post[]) => {},
+  setIsLoadingPosts: (value: boolean) => {},
+  fetchMorePosts: (lastPostId: number) => {},
 })
 
 export const PostContextProvider = (props) => {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState<Post[]>([])
 
-  const [isNeedMorePosts, setIsNeedMorePosts] = useState(false)
+  const handleSetPosts = (posts: Post[]) => {
+    setPosts((prevData) => [...prevData, ...posts])
+  }
+
   const [isLoadingPosts, setIsLoadingPosts] = useState(false)
 
-  const handleChangePosts = (data) => {
-    setPosts([...data])
-  }
+  const [hasMorePosts, setHasMorePosts] = useState(true)
+
+  const fetchMorePosts = useCallback(async (lastPostId: number) => {
+    try {
+      setIsLoadingPosts(true)
+      const data = await fetchPosts({
+        last_post_id: lastPostId,
+      })
+      if (data.length < 10) {
+        setHasMorePosts(false)
+      }
+      handleSetPosts(data)
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setIsLoadingPosts(false)
+    }
+  }, [])
 
   return (
     <PostContext.Provider
       value={{
         posts,
-        isNeedMorePosts,
         isLoadingPosts,
-        changePosts: handleChangePosts,
-        changeIsNeedMorePosts: setIsNeedMorePosts,
-        changeIsLoadingPosts: setIsLoadingPosts,
+        hasMorePosts,
+        handleSetPosts,
+        setIsLoadingPosts,
+        fetchMorePosts,
       }}
     >
       {props.children}

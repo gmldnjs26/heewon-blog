@@ -1,14 +1,15 @@
 import { styled } from '@mui/material/styles'
-import { FC, ReactNode, useContext, useRef } from 'react'
-import { PostDetail } from '~/types/global'
+import { FC, ReactNode, useContext, useEffect, useRef } from 'react'
+import { Post } from '~/types/global'
 import PostItem from './PostItem'
 import { PostContext } from '~/context/post-context'
 import Link from 'next/link'
+import { useIntersectionObserver } from '~/hooks/useIntersectionObserver'
 
 type Props = {
   className?: string
   children?: ReactNode
-  postList: PostDetail[]
+  posts: Post[]
 }
 
 const SC = {
@@ -19,17 +20,31 @@ const SC = {
   })),
 }
 
-const PostList: FC<Props> = ({ postList }) => {
-  const { isLoadingPosts, isNeedMorePosts } = useContext(PostContext)
+const PostList: FC<Props> = ({ posts }) => {
+  const { isLoadingPosts, hasMorePosts, fetchMorePosts } = useContext(PostContext)
+
   const lastPostRef = useRef(null)
+  const { addIntersectHandler, removeIntersectHandler } = useIntersectionObserver()
+  useEffect(() => {
+    if (!lastPostRef.current || !hasMorePosts) return
+    const targets = [lastPostRef.current]
+    addIntersectHandler(targets, null, (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          fetchMorePosts(posts[posts.length - 1].id)
+        }
+      })
+    })
+    return () => removeIntersectHandler()
+  }, [posts])
 
   return (
     <SC.PostList>
-      {postList.map((post, index) => (
+      {posts.map((post, index) => (
         <Link
           href={`/posts/${post.id}`}
-          ref={index === postList.length - 3 ? lastPostRef : undefined}
-          key={post.id}
+          ref={index === posts.length - 3 ? lastPostRef : undefined}
+          key={index}
         >
           <PostItem post={post} />
         </Link>

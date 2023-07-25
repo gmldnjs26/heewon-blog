@@ -8,8 +8,6 @@ COPY . .
 ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /
 RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
 
-CMD ["air"]
-
 FROM golang:1.18 as prod
 
 WORKDIR /app

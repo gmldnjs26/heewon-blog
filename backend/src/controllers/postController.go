@@ -7,6 +7,7 @@ import (
 	"heewon-blog/src/models"
 
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm"
 )
 
 func GetPost(c *fiber.Ctx) error {
@@ -22,30 +23,37 @@ func GetPost(c *fiber.Ctx) error {
 }
 
 type PostGetParams struct {
-	LastId       int    `query:"last_id"`
+	LastPostId   int    `query:"last_post_id"`
 	CategoryName string `query:"category_name"`
 }
 
 func GetPosts(c *fiber.Ctx) error {
+
 	var posts []models.Post
-	// var queryParams PostGetParams
-	// // 쿼리 파라미터를 파싱하여 queryParams에 저장
-	// if err := c.QueryParser(&queryParams); err != nil {
-	// 	return err
-	// }
 	conditions := make(map[string]interface{})
 	var joins string
+	// 이 문제는 database.DB 객체가 전역적으로 공유되고 있는데, 이 객체의 상태가 요청 사이에서 유지되고 있기 때문에 발생하는 것 같습니다.
+	// database.DB 객체에 Where 조건을 추가하면, 그 조건은 해당 객체의 생명주기 동안 유지되므로, 다음 요청에서도 그 조건이 적용됩니다.
+	// FIXME: lastPostId > ? 이 부분의 문법에 의해서 conditions에 넣는게 불가능했기 때문에 별로도 where절을 셋팅, 별도의 셋팅으로 인해 직접적으로
+	// 전역의 db 인스턴스를 건들이고 있기 때문에 이 검색 메소드에서만 별로도 세션을 나누어서 검색을 하게끔 하고 있다. 더 개선할 여지가 많이 있어보인다.
+	db := database.DB.Session(&gorm.Session{NewDB: true})
+
 	categoryName := c.Query("category_name", "")
-	lastId := c.Query("last_id", "")
+	lastPostId := c.Query("last_post_id", "")
+
 	if categoryName != "" {
-		// FIXME: ORM의 기능을 이용하고 싶은데 일단 나마쿼리로..
 		joins = "left join categories on posts.category_id = categories.id"
 		conditions["categories.name"] = categoryName
 	}
-	if lastId != "" {
-		conditions["post.id > ?"] = lastId
+	if lastPostId != "" {
+		db = db.Where("id > ?", lastPostId)
 	}
-	database.DB.Joins(joins).Where(conditions).Limit(10).Find(&posts)
+
+	for key, value := range conditions {
+		db = db.Where(key, value)
+	}
+
+	db.Joins(joins).Limit(10).Find(&posts)
 	return c.JSON(posts)
 }
 

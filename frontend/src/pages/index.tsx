@@ -1,25 +1,30 @@
-import { FC, ReactNode } from 'react'
-import { PostDetail } from '~/types/global'
-import { fetchPostList } from '~/api'
+import { FC, ReactNode, useContext, useEffect } from 'react'
+import { Post } from '~/types/global'
+import { fetchPosts } from '~/api'
 import PostList from '~/components/PostList'
+import { PostContext } from '~/context/post-context'
 
 type Props = {
   className?: string
   children?: ReactNode
-  postList: PostDetail[]
+  posts: Post[]
 }
 
-const Home: FC<Props> = ({ postList }) => {
-  return <PostList postList={postList} />
+const Home: FC<Props> = (props) => {
+  const { posts, handleSetPosts } = useContext(PostContext)
+  useEffect(() => {
+    handleSetPosts(props.posts)
+  }, [])
+  return <PostList posts={posts || []} />
 }
 
 export default Home
 
 export async function getServerSideProps() {
-  const postList = await fetchPostList()
+  const posts = await fetchPosts()
   return {
     props: {
-      postList: postList || [],
+      posts,
     },
   }
 }

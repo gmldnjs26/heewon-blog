@@ -5,7 +5,7 @@ export interface Category {
   children?: Category[]
 }
 
-export interface PostDetail {
+export interface Post {
   id: number
   title: string
   contents: string

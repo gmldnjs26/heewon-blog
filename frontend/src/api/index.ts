@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { Category, PostDetail, PostInput } from '../types/global'
+import { Category, Post, PostInput } from '../types/global'
 
 let baseURL
 if (process.env.NODE_ENV === 'development') {
@@ -13,7 +13,7 @@ const $axios = axios.create({
   withCredentials: true,
 })
 
-export const createPost = async (inputData: PostInput): Promise<PostDetail> => {
+export const createPost = async (inputData: PostInput): Promise<Post> => {
   try {
     const { data } = await $axios.post('/posts', {
       category_id: inputData.categoryId,
@@ -29,7 +29,7 @@ export const createPost = async (inputData: PostInput): Promise<PostDetail> => {
   }
 }
 
-export const fetchPostDetail = async (postId: string): Promise<PostDetail> => {
+export const fetchPost = async (postId: string): Promise<Post> => {
   try {
     const { data } = await $axios.get(`/posts/${postId}`)
     return data
@@ -38,7 +38,7 @@ export const fetchPostDetail = async (postId: string): Promise<PostDetail> => {
   }
 }
 
-export const fetchPostList = async (params = {}): Promise<PostDetail[]> => {
+export const fetchPosts = async (params = {}): Promise<Post[]> => {
   try {
     const { data } = await $axios.get('/posts', { params })
     return data

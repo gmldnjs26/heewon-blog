@@ -3,14 +3,14 @@ import { styled } from '@mui/material/styles'
 import PostHeader from '@/components/PostHeader'
 import PostBody from '@/components/PostBody'
 import PostNavigation from '@/components/PostNavigation'
-import { PostDetail } from '@/types/global'
-import { fetchPostDetail } from '@/api'
+import { Post } from '@/types/global'
+import { fetchPost } from '@/api'
 
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
 type Props = {
   className?: string
-  post: PostDetail
+  post: Post
 }
 
 const SC = {
@@ -103,7 +103,7 @@ export default Post
 
 export async function getServerSideProps(context) {
   const { id } = context.query
-  const post = await fetchPostDetail(id)
+  const post = await fetchPost(id)
   return {
     props: {
       post: post || {},
