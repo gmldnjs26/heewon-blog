@@ -22,11 +22,6 @@ func GetPost(c *fiber.Ctx) error {
 	return c.JSON(post)
 }
 
-type PostGetParams struct {
-	LastPostId   int    `query:"last_post_id"`
-	CategoryName string `query:"category_name"`
-}
-
 func GetPosts(c *fiber.Ctx) error {
 
 	var posts []models.Post
@@ -91,7 +86,12 @@ func UpdatePost(c *fiber.Ctx) error {
 }
 
 func DeletePost(c *fiber.Ctx) error {
-	return c.JSON(fiber.Map{
-		"message": "message",
-	})
+	postId, _ := strconv.Atoi(c.Params("post_id"))
+
+	post := models.Post{}
+	post.Id = uint(postId)
+
+	database.DB.Delete(&post)
+
+	return nil
 }
