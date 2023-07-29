@@ -23,7 +23,7 @@ phases:
           elif [[ "$service" == "heewon-blog_db" ]]; then
             image="mysql:5.7"
           fi
-          echo "Tagging and pushing the $service image... imgea -> $image ecr -> $ECR_REPOSITORY_URI"
+          echo "Tagging and pushing the $service image..."
           docker tag $image $ECR_REPOSITORY_URI:$service
           docker push $ECR_REPOSITORY_URI:$service
         done
