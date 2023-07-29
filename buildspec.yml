@@ -1,34 +1,42 @@
 version: 0.2
-
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
       - aws ecr get-login-password --region ap-northeast-1
+      - REPOSITORY_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker images....
-      - docker-compose build
-      # - echo Pulling the mysql:5.7 image...
-      # - docker pull mysql:5.7
-      # - echo Pulling the nginx:1.18.0 image...
-      # - docker pull nginx:1.18.0
-      - echo Tagging and pushing the images...
-      - |
-        for service in heewon-blog_frontend-proxy heewon-blog_frontend heewon-blog_backend heewon-blog_db; do
-          if [[ "$service" == "heewon-blog_frontend-proxy" ]]; then
-            image="nginx:1.18.0"
-          elif [[ "$service" == "heewon-blog_db" ]]; then
-            image="mysql:5.7"
-          else
-            image="$service"
-          fi
-          echo "Tagging and pushing the $service image..."
-          docker tag $image $ECR_REPOSITORY_URI:$service
-          docker push $ECR_REPOSITORY_URI:$service
-        done
+      - echo Building the Docker images...
+      
+      # Frontend
+      - cd frontend
+      - docker build -t $REPOSITORY_URI:frontend-$IMAGE_TAG .
+      - cd ..
+
+      # Backend
+      - cd backend
+      - docker build -t $REPOSITORY_URI:backend-$IMAGE_TAG .
+      - cd ..
+
+      # DB
+      - docker pull mysql:5.7
+      - docker tag mysql:5.7 $REPOSITORY_URI:db-$IMAGE_TAG
+
+      # Frontend-proxy
+      - docker pull nginx:1.18.0
+      - docker tag nginx:1.18.0 $REPOSITORY_URI:frontend-proxy-$IMAGE_TAG
+
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:frontend-$IMAGE_TAG
+      - docker push $REPOSITORY_URI:backend-$IMAGE_TAG
+      - docker push $REPOSITORY_URI:db-$IMAGE_TAG
+      - docker push $REPOSITORY_URI:frontend-proxy-$IMAGE_TAG
