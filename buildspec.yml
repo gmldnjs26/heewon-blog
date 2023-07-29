@@ -18,6 +18,15 @@ phases:
       - echo Tagging and pushing the images...
       - |
         for service in heewon-blog_frontend-proxy heewon-blog_frontend heewon-blog_backend heewon-blog_db; do
+          if [[ "$service" == "heewon-blog_frontend-proxy" ]]; then
+            image="nginx:1.18.0"
+          elif [[ "$service" == "heewon-blog_db" ]]; then
+            image="mysql:5.7"
+          else
+            image="$service"
+          fi
+          echo "Tagging and pushing the $service image..."
+          docker tag $image $ECR_REPOSITORY_URI:$service
           docker push $ECR_REPOSITORY_URI:$service
         done
   post_build:
