@@ -10,7 +10,7 @@ COPY . .
 CMD ["yarn", "dev"]
 
 
-FROM node:16.13.2-alpine as prod
+FROM node:16.14-alpine as prod
 
 WORKDIR /app
 COPY ./package.json ./
