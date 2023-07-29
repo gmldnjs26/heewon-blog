@@ -17,19 +17,7 @@ phases:
       # - docker pull nginx:1.18.0
       - echo Tagging and pushing the images...
       - |
-        for service in frontend-proxy frontend db backend; do
-          image=$service
-          if [[ "$service" == "frontend-proxy" ]]; then
-            image="nginx:1.18.0"
-          elif [[ "$service" == "db" ]]; then
-            image="mysql:5.7"
-          else
-            docker-compose up -d $service
-            image_id=$(docker-compose images -q $service)
-            image="$image_id:latest"
-            docker tag $image_id $ECR_REPOSITORY_URI:$service
-          fi
-          echo "Tagging and pushing the $service image..."
+        for service in heewon-blog_frontend-proxy heewon-blog_frontend heewon-blog_backend heewon-blog_db; do
           docker push $ECR_REPOSITORY_URI:$service
         done
   post_build:
