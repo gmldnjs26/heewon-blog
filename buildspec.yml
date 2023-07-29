@@ -11,22 +11,25 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker images....
       - docker-compose build
-      - echo Pulling the mysql:5.7 image...
-      - docker pull mysql:5.7
-      - echo Pulling the nginx:1.18.0 image...
-      - docker pull nginx:1.18.0
+      # - echo Pulling the mysql:5.7 image...
+      # - docker pull mysql:5.7
+      # - echo Pulling the nginx:1.18.0 image...
+      # - docker pull nginx:1.18.0
       - echo Tagging and pushing the images...
       - |
-        for service in heewon-blog_frontend-proxy heewon-blog_frontend heewon-blog_backend heewon-blog_db; do
-          if [[ "$service" == "heewon-blog_frontend-proxy" ]]; then
+        for service in frontend-proxy frontend db backend; do
+          image=$service
+          if [[ "$service" == "frontend-proxy" ]]; then
             image="nginx:1.18.0"
-          elif [[ "$service" == "heewon-blog_db" ]]; then
+          elif [[ "$service" == "db" ]]; then
             image="mysql:5.7"
           else
-            image=$service
+            docker-compose up -d $service
+            image_id=$(docker-compose images -q $service)
+            image="$image_id:latest"
+            docker tag $image_id $ECR_REPOSITORY_URI:$service
           fi
           echo "Tagging and pushing the $service image..."
-          docker tag $image $ECR_REPOSITORY_URI:$service
           docker push $ECR_REPOSITORY_URI:$service
         done
   post_build:
