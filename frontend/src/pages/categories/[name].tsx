@@ -6,20 +6,20 @@ import PostList from '~/components/PostList'
 type Props = {
   className?: string
   children?: ReactNode
-  postList: Post[]
+  posts: Post[]
 }
 
-const Home: FC<Props> = ({ postList }) => {
-  return <PostList postList={postList} />
+const Home: FC<Props> = ({ posts }) => {
+  return <PostList posts={posts} />
 }
 
 export default Home
 
 export async function getServerSideProps(ctx) {
-  const postList = await fetchPosts({ category_name: ctx.params.name })
+  const posts = await fetchPosts({ category_name: ctx.params.name })
   return {
     props: {
-      postList: postList || [],
+      posts: posts || [],
     },
   }
 }
