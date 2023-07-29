@@ -26,8 +26,8 @@ phases:
             image="$service:latest"
           fi
           echo "Tagging and pushing the $service image... imgea -> $image ecr -> $ECR_REPOSITORY_URI"
-          docker tag $image $ECR_REPOSITORY_URI:$service
-          docker push $ECR_REPOSITORY_URI:$service
+          docker tag $image 007565998556.dkr.ecr.ap-northeast-1.amazonaws.com/heewon-blog-repo:$service
+          docker push 007565998556.dkr.ecr.ap-northeast-1.amazonaws.com/heewon-blog-repo:$service
         done
   post_build:
     commands:
