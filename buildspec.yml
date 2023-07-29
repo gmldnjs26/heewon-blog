@@ -22,8 +22,6 @@ phases:
             image="nginx:1.18.0"
           elif [[ "$service" == "heewon-blog_db" ]]; then
             image="mysql:5.7"
-          else
-            image="$service:latest"
           fi
           echo "Tagging and pushing the $service image... imgea -> $image ecr -> $ECR_REPOSITORY_URI"
           docker tag $image 007565998556.dkr.ecr.ap-northeast-1.amazonaws.com/heewon-blog-repo:$service
