@@ -7,7 +7,7 @@ phases:
       - REPOSITORY_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}
       - aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URI
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      # - IMAGE_TAG=${COMMIT_HASH:=latest}
 
   build:
     commands:
@@ -16,27 +16,27 @@ phases:
       
       # Frontend
       - cd frontend
-      - docker build -t $REPOSITORY_URI:frontend-$IMAGE_TAG .
+      - docker build -t $REPOSITORY_URI:frontend-lastest .
       - cd ..
 
       # Backend
       - cd backend
-      - docker build -t $REPOSITORY_URI:backend-$IMAGE_TAG .
+      - docker build -t $REPOSITORY_URI:backend-lastest .
       - cd ..
 
       # DB
       - docker pull mysql:5.7
-      - docker tag mysql:5.7 $REPOSITORY_URI:db-$IMAGE_TAG
+      - docker tag mysql:5.7 $REPOSITORY_URI:db-lastest
 
       # Frontend-proxy
       - docker pull nginx:1.18.0
-      - docker tag nginx:1.18.0 $REPOSITORY_URI:frontend-proxy-$IMAGE_TAG
+      - docker tag nginx:1.18.0 $REPOSITORY_URI:frontend-proxy-lastest
 
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push $REPOSITORY_URI:frontend-$IMAGE_TAG
-      - docker push $REPOSITORY_URI:backend-$IMAGE_TAG
-      - docker push $REPOSITORY_URI:db-$IMAGE_TAG
-      - docker push $REPOSITORY_URI:frontend-proxy-$IMAGE_TAG
+      - docker push $REPOSITORY_URI:frontend-lastest
+      - docker push $REPOSITORY_URI:backend-lastest
+      - docker push $REPOSITORY_URI:db-lastest
+      - docker push $REPOSITORY_URI:frontend-proxy-lastest
