@@ -76,8 +76,3 @@ cd frontend
 ```bash
 npm run dev
 ```
-
-### Prod
-```bash
-docker-compose up
-```
