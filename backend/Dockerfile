@@ -15,4 +15,4 @@ COPY go.mod .
 COPY go.sum .
 RUN go mod download
 COPY . .
-ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /
+CMD ["go", "run", "main.go"]
