@@ -5,6 +5,7 @@ import PostItem from './PostItem'
 import { PostContext } from '~/context/post-context'
 import Link from 'next/link'
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver'
+import Loading from './Loading'
 
 type Props = {
   className?: string
@@ -17,6 +18,11 @@ const SC = {
     display: 'flex',
     flexDirection: 'column',
     rowGap: '24px',
+  })),
+  LoadingWrapper: styled('div')(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    margin: '16px 0',
   })),
 }
 
@@ -49,6 +55,11 @@ const PostList: FC<Props> = ({ posts }) => {
           <PostItem post={post} />
         </Link>
       ))}
+      {isLoadingPosts && (
+        <SC.LoadingWrapper>
+          <Loading />
+        </SC.LoadingWrapper>
+      )}
     </SC.PostList>
   )
 }

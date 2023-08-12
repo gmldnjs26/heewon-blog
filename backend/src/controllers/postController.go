@@ -33,15 +33,15 @@ func GetPosts(c *fiber.Ctx) error {
 	// 전역의 db 인스턴스를 건들이고 있기 때문에 이 검색 메소드에서만 별로도 세션을 나누어서 검색을 하게끔 하고 있다. 더 개선할 여지가 많이 있어보인다.
 	db := database.DB.Session(&gorm.Session{NewDB: true})
 
-	categoryName := c.Query("category_name", "")
 	lastPostId := c.Query("last_post_id", "")
+	if lastPostId != "" {
+		db = db.Where("id > ?", lastPostId)
+	}
 
+	categoryName := c.Query("category_name", "")
 	if categoryName != "" {
 		joins = "left join categories on posts.category_id = categories.id"
 		conditions["categories.name"] = categoryName
-	}
-	if lastPostId != "" {
-		db = db.Where("id > ?", lastPostId)
 	}
 
 	for key, value := range conditions {

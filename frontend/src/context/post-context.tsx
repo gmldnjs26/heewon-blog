@@ -7,6 +7,7 @@ export const PostContext = React.createContext({
   isLoadingPosts: false,
   hasMorePosts: true,
   handleSetPosts: (value: Post[]) => {},
+  handleResetPosts: () => {},
   setIsLoadingPosts: (value: boolean) => {},
   fetchMorePosts: (lastPostId: number) => {},
 })
@@ -16,6 +17,10 @@ export const PostContextProvider = (props) => {
 
   const handleSetPosts = (posts: Post[]) => {
     setPosts((prevData) => [...prevData, ...posts])
+  }
+
+  const handleResetPosts = () => {
+    setPosts([])
   }
 
   const [isLoadingPosts, setIsLoadingPosts] = useState(false)
@@ -46,6 +51,7 @@ export const PostContextProvider = (props) => {
         isLoadingPosts,
         hasMorePosts,
         handleSetPosts,
+        handleResetPosts,
         setIsLoadingPosts,
         fetchMorePosts,
       }}

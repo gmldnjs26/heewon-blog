@@ -11,9 +11,10 @@ type Props = {
 }
 
 const Home: FC<Props> = (props) => {
-  const { posts, handleSetPosts } = useContext(PostContext)
+  const { posts, handleSetPosts, handleResetPosts } = useContext(PostContext)
   useEffect(() => {
     handleSetPosts(props.posts)
+    return () => handleResetPosts()
   }, [])
   return <PostList posts={posts || []} />
 }
