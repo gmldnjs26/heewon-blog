@@ -15,7 +15,7 @@ func GetComments(c *fiber.Ctx) error {
 	return c.JSON(comments)
 }
 
-func CreateComments(c *fiber.Ctx) error {
+func CreateComment(c *fiber.Ctx) error {
 	payload := struct {
 		PostId   int    `json:"post_id"`
 		UserId   int    `json:"user_id"`
@@ -37,13 +37,13 @@ func CreateComments(c *fiber.Ctx) error {
 	return c.JSON(comment)
 }
 
-func UpdateComments(c *fiber.Ctx) error {
+func UpdateComment(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"message": "message",
 	})
 }
 
-func DeleteComments(c *fiber.Ctx) error {
+func DeleteComment(c *fiber.Ctx) error {
 	commentId, _ := strconv.Atoi(c.Params("comment_id"))
 
 	comment := models.Comment{}
