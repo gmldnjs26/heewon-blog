@@ -4,8 +4,7 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - REPOSITORY_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}
-      - aws ecr get-login-password | docker login --username AWS --password-stdin $REPOSITORY_URI
+      - aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       # 자동배포 테스트이므로 그냥 latest로 통일
       # - IMAGE_TAG=${COMMIT_HASH:=latest}
@@ -17,27 +16,27 @@ phases:
       
       # Frontend
       - cd frontend
-      - docker build -t $REPOSITORY_URI:frontend-latest .
+      - docker build -t $ECR_REPOSITORY_URI:frontend-latest .
       - cd ..
 
       # Backend
       - cd backend
-      - docker build -t $REPOSITORY_URI:backend-latest .
+      - docker build -t $ECR_REPOSITORY_URI:backend-latest .
       - cd ..
 
       # DB
       - docker pull mysql:5.7
-      - docker tag mysql:5.7 $REPOSITORY_URI:db-latest
+      - docker tag mysql:5.7 $ECR_REPOSITORY_URI:db-latest
 
       # Frontend-proxy
       - docker pull nginx:1.18.0
-      - docker tag nginx:1.18.0 $REPOSITORY_URI:frontend-proxy-latest
+      - docker tag nginx:1.18.0 $ECR_REPOSITORY_URI:frontend-proxy-latest
 
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push $REPOSITORY_URI:frontend-latest
-      - docker push $REPOSITORY_URI:backend-latest
-      - docker push $REPOSITORY_URI:db-latest
-      - docker push $REPOSITORY_URI:frontend-proxy-latest
+      - docker push $ECR_REPOSITORY_URI:frontend-latest
+      - docker push $ECR_REPOSITORY_URI:backend-latest
+      - docker push $ECR_REPOSITORY_URI:db-latest
+      - docker push $ECR_REPOSITORY_URI:frontend-proxy-latest
