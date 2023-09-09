@@ -16,12 +16,12 @@ phases:
       
       # Frontend
       - cd frontend
-      - docker build -t $ECR_REPOSITORY_URI:frontend-latest --target prod .
+      - docker build --no-cache -t $ECR_REPOSITORY_URI:frontend-latest --target prod .
       - cd ..
 
       # Backend
       - cd backend
-      - docker build -t $ECR_REPOSITORY_URI:backend-latest --target prod .
+      - docker build --no-cache -t $ECR_REPOSITORY_URI:backend-latest --target prod .
       - cd ..
 
       # DB
